@@ -833,6 +833,16 @@
   <button
     type="button"
     class="page-tab"
+    data-page="commands"
+    role="tab"
+    aria-selected="false"
+    aria-controls="page-commands">
+    명령어
+  </button>
+
+  <button
+    type="button"
+    class="page-tab"
     data-page="characters"
     role="tab"
     aria-selected="false"
@@ -1279,6 +1289,333 @@
     <span>SECRET MATCHING GAME · SEASON 01</span>
   </div>
 </footer>
+
+</main>
+
+<main
+  id="page-commands"
+  class="page-view"
+  role="tabpanel"
+  aria-label="명령어 목록"
+  hidden>
+
+<div class="hero" style="min-height:auto; padding:90px 24px 50px;">
+  <div class="eyebrow gold">COMMAND REFERENCE</div>
+  <h1 style="max-width:16ch;">채팅창에서<br><em>바로 쓰는</em> 명령어</h1>
+  <p class="lead">
+    !명령어를 입력하면 RP 흐름을 잠시 멈추고 해당 기능이 즉시 실행됩니다.
+    상황에 맞는 명령어를 찾아 사용해보세요.
+  </p>
+</div>
+
+<!-- 정보조회 -->
+<section class="doc" id="cmd-info" style="padding-top:60px;">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">GROUP A · INFO</div>
+      <h2>정보조회</h2>
+    </div>
+    <div class="sec-num">A</div>
+  </div>
+  <p class="sec-desc">현재 진행 상황과 데이터를 확인하는 명령어입니다.</p>
+
+  <div class="grid-3" style="margin-top:36px;">
+    <div class="m-card">
+      <div class="m-tag">!명령어 / !커맨드</div>
+      <h3>명령어/커맨드 목록</h3>
+      <p>전체 명령어·한줄요약을 보여줍니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">LINK / !LINK</div>
+      <h3>LINK 메인화면</h3>
+      <p>시즌·주차·일차·보유P·누적P와 메뉴 목록을 출력합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">공지 / !공지</div>
+      <h3>공지 현황</h3>
+      <p>시즌·운영·이벤트·라운지 공지를 확인합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">미션 / !미션</div>
+      <h3>미션 현황</h3>
+      <p>진행중인 공통·개인·릴레이 미션의 조건과 남은 시간을 확인합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">정답 / !정답</div>
+      <h3>정답 제출</h3>
+      <p>이번 주 정답 기회와 총 사용 횟수를 확인하고 정답을 제출합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">LINK > 일정 / !일정</div>
+      <h3>일정 현황</h3>
+      <p>시즌·모임·마감일·종료예정 일정 현황을 보여줍니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag"> 내정보 / !내정보 </div>
+      <h3>내 정보 출력</h3>
+      <p>내정보·보유P·누적P·보유아이템·활동기록을 확인할 수 있습니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">LINK > 참가정보 / !참가정보 </div>
+      <h3>참가정보 현황</h3>
+      <p>공개된 참가자에 대한 정보확인 및 누적포인트 랭킹을 확인할 수 있습니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">LINK > 랭킹 / !랭킹 </div>
+      <h3>랭킹 현황</h3>
+      <p>참가자의 누적P 기준 공개랭킹을 출력합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">커뮤니티 / !커뮤니티</div>
+      <h3>커뮤니티 피드</h3>
+      <p>참가자들의 최신글·HOT글·후기글을 모바일 피드 형태로 보여줍니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">상태 / !상태</div>
+      <h3>대상 상태 확인</h3>
+      <p>현재 장면에 있는 인물의 상황·신체상태·착용물을 확인합니다. <em style="color:var(--gold);">TBD</em></p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">조사 / !조사</div>
+      <h3>정보 수집</h3>
+      <p>보유P를 사용해 단서확인·폰훔쳐보기·속마음일기 중 하나를 실행합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 시설이용 -->
+<section class="doc" id="cmd-info" style="padding-top:60px;">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">GROUP B · FACILITIES</div>
+      <h2>시설이용</h2>
+    </div>
+    <div class="sec-num">A</div>
+  </div>
+  <p class="sec-desc">시설 이용 편의를 위한 명령어입니다.</p>
+
+  <div class="grid-3" style="margin-top:36px;">
+    <div class="m-card">
+      <div class="m-tag">LINK > 블랙마켓 / !블랙마켓</div>
+      <h3>LINK 메인화면</h3>
+      <p>보유P·판매상품·가격·효과 메뉴 목록을 출력합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">LINK>시설 / !시설</div>
+      <h3>게임·리조트 시설</h3>
+      <p>게임시설과 리조트 시설을 확인할 수 있습니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">게임시설 / !게임시설</div>
+      <h3>게임시설</h3>
+      <p>게임시설 소개·사용시 소모P·이용가능상태 확인 및 이용할 수 있습니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">!제휴접객시설</div>
+      <h3>제휴접객시설</h3>
+      <p>이용가능한 제휴 접객시설 목록을 보여줍니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">분장실 / !분장실</div>
+      <h3>분장실</h3>
+      <p>분장실 입장시 이용요금 차감 안내 및 즉시 이용 가능합니다. 이용시 최초 랜덤 분장도 시켜줍니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">!CCTV / !CCTV관제실</div>
+      <h3>CCTV</h3>
+      <p>참가자 한 명의 최근 동선을 확인할 수 있습니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">!보관실</div>
+      <h3>보관실</h3>
+      <p>1인 1실. 물품을 보관하거나 보관된 물품을 회수할 수 있습니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">!방음실</div>
+      <h3>방음실</h3>
+      <p>방음시설이 완비된 공간에서 선택한 참가자와 외부간섭없는 대화를 연출합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">!테마룸</div>
+      <h3>테마룸</h3>
+      <p>원하는 테마를 선택하거나 직접 입력해서 사용할 수 있습니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">!홀딩룸</div>
+      <h3>홀딩룸</h3>
+      <p>스토커가 자신에게 배정된 피해자를 격리할 수 있습니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">!보관실</div>
+      <h3>보관실</h3>
+      <p>1인 1실. 물품을 보관하거나 보관된 물품을 회수할 수 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 진행제어 -->
+<section class="doc" id="cmd-flow">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">GROUP C · FLOW CONTROL</div>
+      <h2>진행제어</h2>
+    </div>
+    <div class="sec-num">B</div>
+  </div>
+  <p class="sec-desc">장면과 흐름을 직접 조정하는 명령어입니다.</p>
+
+  <div class="grid-3" style="margin-top:36px;">
+    <div class="m-card">
+      <div class="m-tag">장면전환 / !전환</div>
+      <h3>장면전환</h3>
+      <p>현재 장면을 마무리하고 다음 시간대·장소·이벤트로 이동합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">오류수정 / !오류수정</div>
+      <h3>오류수정</h3>
+      <p>설정충돌·캐릭터붕괴·반복출력 등 원치 않는 전개를 바로잡습니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">수위조절 / !저수위 · !고수위</div>
+      <h3>수위조절</h3>
+      <p>이후 장면의 성인·긴장 묘사 강도를 즉시 낮추거나 높입니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">포커스집중</div>
+      <h3>포커스집중</h3>
+      <p>지정 캐릭터 외 전원과의 로맨스 전개를 우정 관계로 제한합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">상황재설정 / #명령어</div>
+      <h3>상황재설정</h3>
+      <p>#시간스킵·#관계변경 등으로 시간·관계·분위기를 재설정합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">이어받기 / 요약</div>
+      <h3>세션 정리</h3>
+      <p>현재 상태를 압축 출력해 새 세션에서 이어가거나 진행을 요약합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 연출강화 -->
+<section class="doc" id="cmd-story">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow red">GROUP D · SCENE</div>
+      <h2>연출강화</h2>
+    </div>
+    <div class="sec-num">C</div>
+  </div>
+  <p class="sec-desc">특정 연출을 강화하거나 장면을 압축·전환하는 명령어입니다.</p>
+
+  <div class="grid-3" style="margin-top:36px;">
+    <div class="m-card">
+      <div class="m-tag">서술강화 / !서술강화</div>
+      <h3>서술강화</h3>
+      <p>과잉해석·반복표현을 줄이고 서술을 즉시 재보정합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">성행위정리 / !성행위정리</div>
+      <h3>성행위정리</h3>
+      <p>장면을 잠시 멈추고 해당 구간을 요약 형식으로 정리합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">질투유발 / !질투유발</div>
+      <h3>질투유발</h3>
+      <p>상황에 맞는 엑스트라를 등장시켜 견제·질투 장면을 만듭니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">독자 / !독자</div>
+      <h3>독자 반응</h3>
+      <p>현재 전개에 대한 가상의 독자 댓글을 메타 반응으로 출력합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 추적 도피 -->
+<section class="doc" id="cmd-chase">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">GROUP E · CHASE</div>
+      <h2>추적 · 도피</h2>
+    </div>
+    <div class="sec-num">D</div>
+  </div>
+  <p class="sec-desc">스토킹 상황의 추격·도주 장면을 한 턴으로 요약 진행합니다.</p>
+
+  <div class="grid-3" style="margin-top:36px;">
+    <div class="m-card">
+      <div class="m-tag">도망 / !도망</div>
+      <h3>도망</h3>
+      <p>스토커에게서 벗어나려는 시도를 성공·부분성공·실패로 판정합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">추격 / !추격</div>
+      <h3>추격</h3>
+      <p>대상의 동선을 추적하는 장면을 판정 요소 기반으로 진행합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NPC 생성 -->
+<section class="doc" id="cmd-npc">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow gold">GROUP F · NPC</div>
+      <h2>NPC 생성</h2>
+    </div>
+    <div class="sec-num">E</div>
+  </div>
+  <p class="sec-desc">세계관에 맞는 랜덤 NPC를 생성하고 고정합니다.</p>
+
+  <div class="grid-3" style="margin-top:36px;">
+    <div class="m-card">
+      <div class="m-tag">랜스 / !랜스</div>
+      <h3>랜덤 스토커</h3>
+      <p>이름·성향·추적방식·비밀까지 포함한 스토커 NPC를 생성합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">랜피 / !랜피</div>
+      <h3>랜덤 피해자</h3>
+      <p>이름·성향·도망방식·비밀까지 포함한 피해자 NPC를 생성합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 시스템 -->
+<section class="doc" id="cmd-system">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">GROUP G · SYSTEM</div>
+      <h2>시스템</h2>
+    </div>
+    <div class="sec-num">F</div>
+  </div>
+  <p class="sec-desc">긴급 호출과 프롬프트 점검용 명령어입니다.</p>
+
+  <div class="grid-3" style="margin-top:36px;">
+    <div class="m-card">
+      <div class="m-tag">호출 / !호출</div>
+      <h3>SOS 호출</h3>
+      <p>현재 위치와 긴급 상태를 운영진에게 전송해 개입을 요청합니다.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">시스템점검</div>
+      <h3>시스템점검</h3>
+      <p>현재 관계·감정 상태와 캐릭터 붕괴 여부를 점검합니다. <em style="color:var(--gold);">TBD</em></p>
+    </div>
+    <div class="m-card">
+      <div class="m-tag">시스템재적용</div>
+      <h3>시스템재적용</h3>
+      <p>최신 시스템 프롬프트를 현재 세션 상태 유지한 채 재적용합니다.</p>
+    </div>
+  </div>
+
+  <div class="notice-strip" style="margin-top:24px;">
+    상태 / 시스템점검 명령어는 세부 항목이 아직 정리중이라 추후 업데이트될 수 있습니다.
+  </div>
+</section>
 
 </main>
 
@@ -2108,6 +2445,22 @@
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+// 상단 CAM 네비게이션 — 명령어/캐릭터 탭에서 클릭해도 이용안내로 돌아가서 스크롤
+  navAnchors.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').slice(1);
+      openPage('guide');
+      requestAnimationFrame(() => {
+        const target = document.getElementById(targetId);
+        if(target){
+          target.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+          });
+        }
+      });
     });
   });
 </script>
