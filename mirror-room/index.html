@@ -406,12 +406,12 @@ section.block{padding:26px 0;}
 
 /* 용어 설명 토글 */
 .term-toggle{
-  flex:0 0 auto; width:20px; height:20px; border-radius:50%; border:1px solid var(--border);
-  background:var(--panel-3); color:var(--text-faint); font-family:var(--mono); font-size:13px;
+  flex:0 0 auto; width:20px; height:20px; border-radius:50%; border:1.5px solid var(--accent);
+  background:var(--accent-soft); color:var(--accent); font-family:var(--mono); font-size:13px; font-weight:600;
   cursor:pointer; padding:0; line-height:1; transition:.12s;
 }
-.term-toggle:hover{color:var(--text); border-color:var(--text-faint);}
-.term-toggle.open{background:var(--gold-soft); border-color:var(--gold); color:var(--gold);}
+.term-toggle:hover{color:#160f22; background:var(--accent); border-color:var(--accent);}
+.term-toggle.open{background:var(--gold); border-color:var(--gold); color:#160f22;}
 .term-desc{
   font-size:13.5px; color:var(--text-faint); line-height:1.55; padding:0 0 10px 2px;
 }
@@ -890,26 +890,26 @@ section.block{padding:26px 0;}
         <div class="tags"><span>여유</span><span>받아주는 포지션</span></div>
         <div class="heat"><span>시작 활동온도</span><b>36.1</b></div>
       </div>
-      <div class="character-card" data-grade="B">
-        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+      <div class="character-card" data-grade="C">
+        <div class="top"><div class="gbadge"><span class="gem">💙</span><br>C</div></div>
         <h3>노하은</h3><div class="real">방송명 퀸비</div>
         <p class="flavor">평소엔 거리를 두다가, 마음먹으면 단숨에 끌어당긴다.</p>
         <div class="tags"><span>도도한 거리감</span><span>펨돔</span></div>
-        <div class="heat"><span>시작 활동온도</span><b>37.1</b></div>
+        <div class="heat"><span>시작 활동온도</span><b>16.1</b></div>
       </div>
-      <div class="character-card" data-grade="B">
-        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+      <div class="character-card" data-grade="G">
+        <div class="top"><div class="gbadge"><span class="gem">💜</span><br>G</div></div>
         <h3>서예린</h3><div class="real">방송명 체리콕</div>
         <p class="flavor">더티토크로 몰아가다, 반응을 보고서야 강도를 정한다.</p>
         <div class="tags"><span>도발적</span><span>펨돔</span></div>
-        <div class="heat"><span>시작 활동온도</span><b>35.1</b></div>
+        <div class="heat"><span>시작 활동온도</span><b>7.1</b></div>
       </div>
-      <div class="character-card" data-grade="B">
-        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+      <div class="character-card" data-grade="G">
+        <div class="top"><div class="gbadge"><span class="gem">💜</span><br>G</div></div>
         <h3>한유리</h3><div class="real">방송명 노을</div>
         <p class="flavor">일할 땐 친절하지만, 자신의 시간엔 조용한 거리를 지킨다.</p>
         <div class="tags"><span>비BDSM</span><span>잔잔한 밀착</span></div>
-        <div class="heat"><span>시작 활동온도</span><b>35.1</b></div>
+        <div class="heat"><span>시작 활동온도</span><b>6.1</b></div>
       </div>
       <div class="character-card" data-grade="G">
         <div class="top"><div class="gbadge"><span class="gem">💜</span><br>G</div></div>
@@ -925,12 +925,12 @@ section.block{padding:26px 0;}
         <div class="tags"><span>장난기</span><span>반응 증폭</span></div>
         <div class="heat"><span>시작 활동온도</span><b>17.1</b></div>
       </div>
-      <div class="character-card" data-grade="B">
-        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+      <div class="character-card" data-grade="C">
+        <div class="top"><div class="gbadge"><span class="gem">💙</span><br>C</div></div>
         <h3>권태오</h3><div class="real">방송명 결</div>
         <p class="flavor">선을 넘기 직전, 능청스럽게 멈춘다. 그게 이 사람의 방식.</p>
         <div class="tags"><span>능청스러움</span><span>비소유</span></div>
-        <div class="heat"><span>시작 활동온도</span><b>35.1</b></div>
+        <div class="heat"><span>시작 활동온도</span><b>15.1</b></div>
       </div>
       <div class="character-card" data-grade="G">
         <div class="top"><div class="gbadge"><span class="gem">💜</span><br>G</div></div>
@@ -1640,8 +1640,9 @@ document.querySelectorAll('.rate').forEach(function(rate){
     b.dataset.v = i;
     b.textContent = lab;
     b.addEventListener('click', function(){
+      var wasActive = b.classList.contains('active');
       rate.querySelectorAll('button').forEach(function(o){o.classList.remove('active');});
-      b.classList.add('active');
+      if(!wasActive){ b.classList.add('active'); }
     });
     rate.appendChild(b);
   });
