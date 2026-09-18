@@ -199,6 +199,9 @@ section.doc{padding:56px 0;border-top:1px solid var(--line-soft);}
 .theme-card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--surface);}
 .theme-card .t{font-family:var(--serif);font-weight:600;font-size:16px;}
 .theme-card .d{font-size:14px;color:var(--text-dim);margin-top:5px;line-height:1.6;}
+.theme-card.clickable{cursor:pointer;transition:.15s;}
+.theme-card.clickable:hover{border-color:var(--gold);}
+.theme-card.clickable.active{border-color:var(--gold);background:var(--gold-soft);}
 
 /* ptable */
 .ptable{width:100%;border-collapse:collapse;font-size:15px;}
@@ -748,6 +751,8 @@ section.block{padding:26px 0;}
         <div class="m-card"><div class="m-tag">아이템 / !아이템</div><h4>아이템</h4><p>보유중인 커플템 등 표시</p></div>
         <div class="m-card"><div class="m-tag">팬덤게시판 / !팬덤게시판</div><h4>팬덤게시판</h4><p>커플링 커뮤니티 피드, 코어팬덤 TOP3</p></div>
         <div class="m-card"><div class="m-tag">독점계약 / !독점계약</div><h4>독점계약</h4><p>대상·기간·계약비 현황</p></div>
+        <div class="m-card"><div class="m-tag">관계 / !관계</div><h4>관계</h4><p>파트너별 활동온도·지명횟수·계약상태 압축 출력</p></div>
+        <div class="m-card"><div class="m-tag">시선 / !시선</div><h4>시선</h4><p>현재 누가 의식·관찰중인지 압축 출력</p></div>
       </div>
     </section>
 
@@ -762,6 +767,7 @@ section.block{padding:26px 0;}
         <div class="m-card"><div class="m-tag">시스템재적용</div><h4>시스템재적용</h4><p>세션 상태 유지한 채 최신 규칙 재적용</p></div>
         <div class="m-card"><div class="m-tag">이어받기 / !이어받기</div><h4>이어받기</h4><p>새 세션 인계용 압축 상태 출력</p></div>
         <div class="m-card"><div class="m-tag">요약 / !요약</div><h4>요약</h4><p>진행 요약 + 체크포인트 고정</p></div>
+        <div class="m-card"><div class="m-tag">이벤트 / !이벤트</div><h4>이벤트</h4><p>지금 진행 가능한 이벤트·트리거 확인(강제 발생 아님)</p></div>
       </div>
     </section>
 
@@ -783,6 +789,7 @@ section.block{padding:26px 0;}
         <div class="m-card"><div class="m-tag">폰훔쳐보기</div><h4>폰훔쳐보기</h4><p>대상 몰래 휴대폰 화면 확인 연출</p></div>
         <div class="m-card"><div class="m-tag">미션정리</div><h4>미션정리</h4><p>진행중 미션 500자 내외 요약</p></div>
         <div class="m-card"><div class="m-tag">이미지 / !이미지온</div><h4>이미지출력</h4><p>주요 장면 이미지 생성 토글</p></div>
+        <div class="m-card"><div class="m-tag">포커스집중 / !포커스집중</div><h4>포커스집중</h4><p>대상 캐릭터 지정시 그 외 전원 친분 관계로 고정</p></div>
       </div>
     </section>
 
@@ -973,17 +980,17 @@ section.block{padding:26px 0;}
     <section class="block" style="padding-top:0;">
 
       <div class="eyebrow pink">추천 프리셋</div>
-      <p class="hint" style="margin:-6px 0 12px;">눌러서 톤·자극수위·취향 몇 가지를 한번에 채우고, 아래에서 자유롭게 더하거나 바꾸세요.</p>
+      <p class="hint" style="margin:-6px 0 12px;">눌러서 톤·자극수위·취향 몇 가지를 한번에 채우고, 아래에서 자유롭게 더하거나 바꾸세요. 다시 누르면 해제, 다른 프리셋을 누르면 이전 선택은 자동으로 바뀝니다.</p>
       <div class="grid-3" style="margin-bottom:20px;">
-        <div class="theme-card" style="cursor:pointer;" onclick="applyProfilePreset('intro')">
+        <div class="theme-card clickable" data-preset-id="intro" onclick="applyProfilePreset('intro')">
           <div class="t">입문형</div>
           <div class="d">가볍게 시작하고 싶을 때 — 잔잔한 밀착감 위주(G~C)</div>
         </div>
-        <div class="theme-card" style="cursor:pointer;" onclick="applyProfilePreset('deep')">
+        <div class="theme-card clickable" data-preset-id="deep" onclick="applyProfilePreset('deep')">
           <div class="t">몰입형</div>
           <div class="d">긴장감 있게 몰아붙여지고 싶을 때 — 지배·통제 중심(C~A)</div>
         </div>
-        <div class="theme-card" style="cursor:pointer;" onclick="applyProfilePreset('scene')">
+        <div class="theme-card clickable" data-preset-id="scene" onclick="applyProfilePreset('scene')">
           <div class="t">관찰 · 상황극형</div>
           <div class="d">분위기와 상황 중심으로 천천히 — 노출·밀착 위주(G~B)</div>
         </div>
@@ -1210,19 +1217,19 @@ section.block{padding:26px 0;}
     <section class="block" style="padding-top:22px;">
 
       <div class="eyebrow pink">추천 프리셋</div>
-      <p class="hint" style="margin:-6px 0 12px;">눌러서 플레이 컨셉 키워드를 바로 채우고, 그 다음부터는 자유롭게 이어가세요(파트너·등급은 아래에서 별도 선택).</p>
+      <p class="hint" style="margin:-6px 0 12px;">눌러서 플레이 컨셉 키워드를 바로 채우고, 그 다음부터는 자유롭게 이어가세요(파트너·등급은 아래에서 별도 선택). 다시 누르면 해제됩니다.</p>
       <div class="grid-3" style="margin-bottom:20px;">
-        <div class="theme-card" style="cursor:pointer;" onclick="applyBookingPreset('거친 명령조,마초 피스톤 몰아붙이기')">
+        <div class="preset" data-keywords="거친 명령조,마초 피스톤 몰아붙이기">
           <div class="t">터프한 리드</div>
-          <div class="d">명령조로 확실하게 몰아붙이는 컨셉</div>
+          <div class="k">거친 명령조 · 마초 피스톤 몰아붙이기</div>
         </div>
-        <div class="theme-card" style="cursor:pointer;" onclick="applyBookingPreset('오일 마사지플,밀착플')">
+        <div class="preset" data-keywords="오일 마사지플,밀착플">
           <div class="t">다정한 케어</div>
-          <div class="d">섬세하게 챙기며 밀착하는 컨셉</div>
+          <div class="k">오일 마사지플 · 밀착플</div>
         </div>
-        <div class="theme-card" style="cursor:pointer;" onclick="applyBookingPreset('애태우기(에지플레이),스릴노출플')">
+        <div class="preset" data-keywords="애태우기(에지플레이),스릴노출플">
           <div class="t">장난 · 텐션</div>
-          <div class="d">온도차로 쥐락펴락, 장난기 있는 컨셉</div>
+          <div class="k">애태우기(에지플레이) · 스릴노출플</div>
         </div>
       </div>
 
@@ -1325,7 +1332,7 @@ section.block{padding:26px 0;}
             <div class="tchip theme-chip" data-theme="훈육형">훈육형</div>
             <div class="tchip theme-chip" data-theme="게임형">게임형</div>
           </div>
-          <p class="hint">테마는 순수 연출 라벨(신규 화폐·수치 없음) — 키워드북 [미러룸_06] 참고, 자유설계로 직접 만들어도 무방</p>
+          <p class="hint">테마는 순수 연출 라벨(신규 화폐·수치 없음) — 키워드북 [미러룸_03] 참고, 자유설계로 직접 만들어도 무방</p>
         </div>
       </div>
 
@@ -1780,13 +1787,37 @@ function clickRateByLabel(label, value){
   if(details) details.open = true;
 }
 
+function clearRateByLabel(label){
+  var row = Array.from(document.querySelectorAll('.kink-row')).find(function(r){
+    var l = r.querySelector('.label');
+    return l && l.textContent.trim() === label;
+  });
+  if(!row) return;
+  var active = row.querySelector('.rate button.active');
+  if(active) active.classList.remove('active');
+}
+
+// 프로필 추천 프리셋 — 단일 선택(하나만 활성) · 다시 누르면 해제, 다른 프리셋 선택시 이전 프리셋이 채운 취향만 자동 해제(수동 체크는 건드리지 않음)
+var activeProfilePresetId = null;
 function applyProfilePreset(id){
   var p = PROFILE_PRESETS[id];
   if(!p) return;
+  var cards = document.querySelectorAll('.theme-card[data-preset-id]');
+  if(activeProfilePresetId === id){
+    p.picks.forEach(function(label){ clearRateByLabel(label); });
+    activeProfilePresetId = null;
+    cards.forEach(function(c){ c.classList.remove('active'); });
+    return;
+  }
+  if(activeProfilePresetId && PROFILE_PRESETS[activeProfilePresetId]){
+    PROFILE_PRESETS[activeProfilePresetId].picks.forEach(function(label){ clearRateByLabel(label); });
+  }
   clickTchipByText('base-style', p.tone);
   clickTchipByText('tier-start', p.tierStart);
   clickTchipByText('tier-max', p.tierMax);
   p.picks.forEach(function(label){ clickRateByLabel(label, 2); });
+  activeProfilePresetId = id;
+  cards.forEach(function(c){ c.classList.toggle('active', c.dataset.presetId === id); });
   var checklistCard = document.querySelector('.category');
   if(checklistCard) checklistCard.closest('.card').scrollIntoView({behavior:'smooth', block:'start'});
 }
@@ -2120,20 +2151,6 @@ bookBtn.addEventListener('click', function(){
     showFail();
   }
 });
-
-/* ===== 방송 예약 탭 · 추천 프리셋(컨셉 키워드 채우기) ===== */
-function applyBookingPreset(csvKeywords){
-  var kws = csvKeywords.split(',');
-  kws.forEach(function(k){
-    var chip = Array.from(document.querySelectorAll('.concept-chip')).find(function(c){ return c.textContent.trim() === k; });
-    if(chip && !chip.classList.contains('locked-chip')){ chip.classList.add('active'); }
-  });
-  if(typeof syncPresetActive === 'function') syncPresetActive();
-  if(typeof renderSummary === 'function') renderSummary();
-  var conceptSection = document.querySelector('.concept-cat');
-  if(conceptSection) conceptSection.scrollIntoView({behavior:'smooth', block:'start'});
-}
-window.applyBookingPreset = applyBookingPreset;
 
 // 초기 렌더
 updatePlaceFilter();
