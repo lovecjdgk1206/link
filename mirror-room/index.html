@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>LINK : 미러룸</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Manrope:wght@500;700;800&display=swap">
 <style>
@@ -539,6 +540,39 @@ section.block{padding:26px 0;}
 }
 .mirror-switch.on{background:var(--gold-soft); border-color:var(--gold);}
 .mirror-switch.on .knob{left:28px; background:var(--gold);}
+
+/* ===== 모바일 가독성 보강 ===== */
+@media (max-width:480px){
+  .wrap{padding:0 16px;}
+  .wrap-narrow{padding-inline:16px;}
+  body{font-size:15px;}
+  .hero{padding:44px 0 30px;}
+  .hero p.lead{font-size:16px;line-height:1.75;}
+  .sec-desc{font-size:15.5px;}
+  .panel p,.m-card p,.theme-card .d,.character-card .flavor,.notice-strip,.card .desc,.hint,
+  .operator-card p.desc,.character-hero p,.reco-box{font-size:15px;line-height:1.7;}
+  .ptable{font-size:14.5px;}
+  .ptable th,.ptable td{padding:10px 8px;}
+  .chip,.tchip{font-size:14.5px;padding:8px 13px;}
+  .stat-row{font-size:14.5px;}
+  .hero-readout{grid-template-columns:1fr;}
+  .hero-readout .cell{border-right:none;border-bottom:1px solid var(--line);}
+  .hero-readout .cell:last-child{border-bottom:none;}
+  .kink-row .label{font-size:15.5px;}
+  .theme-card .t{font-size:16.5px;}
+  .theme-card{padding:16px 16px;}
+  .m-card h4{font-size:17px;}
+  .m-card{padding:18px;}
+  .character-card .flavor{min-height:0;font-size:15px;}
+  .character-card h3{font-size:20px;}
+  .sec-head h2{font-size:24px;}
+  .sec-num{font-size:28px;}
+  .panel{padding:18px;}
+  .card{padding:16px;}
+  .field label{font-size:15px;}
+  .booking-summary{font-size:14.5px;}
+  .goal-detail{font-size:15px;}
+}
 
 </style>
 
