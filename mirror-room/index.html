@@ -823,6 +823,8 @@ section.block{padding:26px 0;}
       <div class="grid-3">
         <div class="m-card"><div class="m-tag">미러박스 / !미러박스</div><h4>메인 메뉴</h4><p>보유 커미션·활동온도·MENU 9종 진입점</p></div>
         <div class="m-card"><div class="m-tag">로비 / !로비</div><h4>로비</h4><p>현재 생방송 채널 목록, 팬덤지수 TOP3 추천</p></div>
+        <div class="m-card"><div class="m-tag">관전 / !관전</div><h4>관전</h4><p>관전자모드 즉시진입, LIVE 채널 목록 확인</p></div>
+        <div class="m-card"><div class="m-tag">취향표 / !취향표</div><h4>취향표</h4><p>51항목 플레이취향(X·?·O·♥) 확인·수정</p></div>
         <div class="m-card"><div class="m-tag">내정보 / !내정보</div><h4>내 프로필</h4><p>활동명·관전자ID·등급·커미션 현황</p></div>
         <div class="m-card"><div class="m-tag">파트너현황 / !파트너현황</div><h4>파트너 현황</h4><p>지명 가능한 파트너, 히든 해금 여부</p></div>
         <div class="m-card"><div class="m-tag">커미션내역 / !커미션내역</div><h4>커미션 내역</h4><p>최근 정산 3~5건, 거부 페널티 포함</p></div>
@@ -840,8 +842,13 @@ section.block{padding:26px 0;}
       <div class="grid-3">
         <div class="m-card"><div class="m-tag">방송예약 / !방송예약</div><h4>방송 예약</h4><p>등급→파트너→목표→장소→컨셉→안전장치 STEP1~6</p></div>
         <div class="m-card"><div class="m-tag">장면전환 / !전환</div><h4>장면전환</h4><p>현재 장면 마무리 후 다음으로 이동</p></div>
+        <div class="m-card"><div class="m-tag">관전흐름 / 전개가속</div><h4>관전흐름</h4><p>관전 정체·반복 즉시 해소, 자율진행 가속</p></div>
+        <div class="m-card"><div class="m-tag">관전흐름복구</div><h4>관전흐름복구</h4><p>반복질문·대기 중단, 다음 장면으로 즉시 진행</p></div>
+        <div class="m-card"><div class="m-tag">유저사칭복구</div><h4>유저사칭복구</h4><p>AI가 임의로 쓴 유저 대사·행동 무효화</p></div>
         <div class="m-card"><div class="m-tag">상황재설정</div><h4>상황재설정</h4><p>설정충돌·캐릭터붕괴·규칙오류 등 수정</p></div>
         <div class="m-card"><div class="m-tag">오류 / !오류</div><h4>오류</h4><p>즉석 경량 복구, 상황재설정보다 가벼움</p></div>
+        <div class="m-card"><div class="m-tag">상태동기화 / 수치복구</div><h4>상태동기화</h4><p>활동온도·커미션·LOCK 등 수치만 최신값으로 복구</p></div>
+        <div class="m-card"><div class="m-tag">UI복구 / !UI / 상태창복구</div><h4>UI복구</h4><p>상태창(UI) 서식만 즉시 재적용</p></div>
         <div class="m-card"><div class="m-tag">시스템점검</div><h4>시스템점검</h4><p>현재 상태·관계·붕괴 여부 1회 점검</p></div>
         <div class="m-card"><div class="m-tag">시스템재적용</div><h4>시스템재적용</h4><p>세션 상태 유지한 채 최신 규칙 재적용</p></div>
         <div class="m-card"><div class="m-tag">이어받기 / !이어받기</div><h4>이어받기</h4><p>새 세션 인계용 압축 상태 출력</p></div>
@@ -866,6 +873,7 @@ section.block{padding:26px 0;}
         <div class="m-card"><div class="m-tag">상태 / !상태</div><h4>상태</h4><p>현재 장면 인물의 상황·신체상태 출력</p></div>
         <div class="m-card"><div class="m-tag">속마음 / !일기</div><h4>속마음일기</h4><p>OOC로 캐릭터 내심을 1회 노출</p></div>
         <div class="m-card"><div class="m-tag">폰훔쳐보기</div><h4>폰훔쳐보기</h4><p>대상 몰래 휴대폰 화면 확인 연출</p></div>
+        <div class="m-card"><div class="m-tag">모브등장 / !모브등장</div><h4>모브등장</h4><p>질투·긴장 연출용 배경인물 일시 등장</p></div>
         <div class="m-card"><div class="m-tag">미션정리</div><h4>미션정리</h4><p>진행중 미션 500자 내외 요약</p></div>
         <div class="m-card"><div class="m-tag">이미지 / !이미지온</div><h4>이미지출력</h4><p>주요 장면 이미지 생성 토글</p></div>
         <div class="m-card"><div class="m-tag">포커스집중 / !포커스집중</div><h4>포커스집중</h4><p>대상 캐릭터 지정시 그 외 전원 친분 관계로 고정</p></div>
@@ -1268,6 +1276,35 @@ section.block{padding:26px 0;}
         <button class="copybtn" id="profileGenBtn">📝 프로필 완성하기</button>
         <pre class="booking-summary" id="profileOutput" style="display:none; margin-top:12px;"></pre>
         <button class="copybtn" id="profileCopyBtn" style="display:none; margin-top:8px;">📋 복사하기</button>
+      </div>
+
+      <div class="card">
+        <span class="eyebrow pink">유저노트 보완지침</span>
+        <h3>유저노트 생성기</h3>
+        <p class="desc">필요한 항목만 켜서(ON) 조합하면, 그대로 유저노트에 붙여넣을 수 있는 보완 프롬프트가 만들어집니다. 끈 항목(OFF)은 결과물에서 빠집니다.</p>
+
+        <div class="subgroup">
+          <div class="sublabel">진행 방식</div>
+          <div class="chipgroup" data-group="multi" data-name="note-flags">
+            <div class="tchip" data-note="uifix">UI고정</div>
+            <div class="tchip" data-note="autoflow">관전자율진행</div>
+            <div class="tchip" data-note="norepeat">반복표현억제</div>
+          </div>
+        </div>
+
+        <div class="subgroup">
+          <div class="sublabel">서술 속도감(택1)</div>
+          <div class="chipgroup" data-group="single" data-name="note-pace">
+            <div class="tchip" data-note="speedup">가속 · 빠르게</div>
+            <div class="tchip" data-note="detail">몰입 · 디테일하게</div>
+          </div>
+        </div>
+
+        <p class="hint" style="margin-top:12px;">UI고정=상태창(STATUS) 매턴 출력 강제 / 관전자율진행=관전중 확인대기없이 자동전개 / 반복표현억제=같은 표현·전개 반복 최소화 / 가속=비트 빠르게 진행 / 몰입=묘사비중↑·천천히</p>
+
+        <button class="copybtn" id="noteGenBtn" style="margin-top:10px;">📝 유저노트 프롬프트 뽑기</button>
+        <pre class="booking-summary" id="noteOutput" style="display:none; margin-top:12px;"></pre>
+        <button class="copybtn" id="noteCopyBtn" style="display:none; margin-top:8px;">📋 복사하기</button>
       </div>
 
       <div class="savebar">
@@ -1992,6 +2029,56 @@ if(profileCopyBtn){
     function showFail(){
       profileCopyBtn.textContent = '⚠ 복사 실패 — 직접 선택해 복사해주세요';
       setTimeout(function(){ profileCopyBtn.textContent = '📋 복사하기'; }, 1800);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(showCopied).catch(showFail);
+    } else {
+      showFail();
+    }
+  });
+}
+
+/* ===== 유저노트 생성기 ===== */
+var NOTE_BLOCKS = {
+  uifix: '[UI유지고정]\n매응답하단```STATUS코드블럭출력必/생략·요약·누락절대X\n장문진행中에도본규칙최우선순위유지\n누락발생時=안내문구없이다음응답에서즉시자동복원',
+  autoflow: '[관전자율진행고정]\n관전中NPC=유저입력대기없이자율전개必\n매응답2~4비트연속진행:직전결과→반응→새행동·대사→상황변화\n한동작後정지·직전재서술·같은질문반복절대X\n진행방법질문X/실행필요한선택만질문\n장문진행中에도본규칙최우선순위유지',
+  norepeat: '[반복표현억제]\n동일대사·표현·전개반복금지/문장완결\n캐릭터말투·관계·감정흐름은유지한채매응답새로운전개만',
+  speedup: '[진행속도_가속]\n장면전환·비트진행최대한빠르게/불필요한대기·질문·확인절차생략\n한응답에다음국면까지자연스럽게진행',
+  detail: '[진행속도_디테일]\n장면전환서두르지않음/감각·심리묘사비중↑\n한비트당충분한전개後다음단계로이동'
+};
+
+var noteGenBtn = document.getElementById('noteGenBtn');
+var noteOutput = document.getElementById('noteOutput');
+var noteCopyBtn = document.getElementById('noteCopyBtn');
+
+if(noteGenBtn){
+  noteGenBtn.addEventListener('click', function(){
+    var picked = [];
+    document.querySelectorAll('[data-name="note-flags"] .tchip.active, [data-name="note-pace"] .tchip.active').forEach(function(chip){
+      var key = chip.dataset.note;
+      if(NOTE_BLOCKS[key]) picked.push(NOTE_BLOCKS[key]);
+    });
+    if(!picked.length){
+      noteOutput.textContent = '켜진(ON) 항목이 없습니다 — 위에서 원하는 항목을 먼저 선택해주세요.';
+    } else {
+      noteOutput.textContent = picked.join('\n\n');
+    }
+    noteOutput.style.display = 'block';
+    noteCopyBtn.style.display = 'inline-block';
+    noteOutput.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+}
+
+if(noteCopyBtn){
+  noteCopyBtn.addEventListener('click', function(){
+    var text = noteOutput.textContent;
+    function showCopied(){
+      noteCopyBtn.textContent = '✅ 복사 완료';
+      setTimeout(function(){ noteCopyBtn.textContent = '📋 복사하기'; }, 1500);
+    }
+    function showFail(){
+      noteCopyBtn.textContent = '⚠ 복사 실패 — 직접 선택해 복사해주세요';
+      setTimeout(function(){ noteCopyBtn.textContent = '📋 복사하기'; }, 1800);
     }
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(text).then(showCopied).catch(showFail);
