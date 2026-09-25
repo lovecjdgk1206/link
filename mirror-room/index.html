@@ -1356,8 +1356,8 @@ section.block{padding:26px 0;}
       <div class="card">
         <span class="step-label">STEP 1</span>
         <h3>미러룸 등급 선택</h3>
-        <p class="desc">원하는 미러룸 등급을 자유롭게 선택하세요. 보유 등급보다 높은 등급을 골라도, 실제 진행은 보유 최고 등급에 맞춰 자동 보정됩니다.</p>
-        <p class="hint">현재 보유 최고 등급 : <b>G</b>(데모 기준값)</p>
+        <p class="desc">원하는 미러룸 등급을 자유롭게 선택하세요. 아래 미리보기는 클릭한 등급 그대로 반영됩니다.</p>
+        <p class="hint">실제 서비스에서는 보유 등급보다 높은 등급을 골라도 보유 최고 등급에 맞춰 자동 보정됩니다(이 페이지는 로그인 연동이 없어 보유 등급을 알 수 없으므로 미리보기엔 적용되지 않음)</p>
         <div class="gradegrid" data-group="single" data-name="booking-grade">
           <div class="gradecard active" data-grade="0" data-name="G" data-gem="자수정" data-fee="10" data-mmin="10" data-mmax="30" data-viewer="30" data-donate="50">
             <span class="gname">G</span><span class="ggem">💜 자수정</span><span class="gsub">부킹비 10C<br>미션 10~30C</span>
@@ -2090,9 +2090,10 @@ if(noteCopyBtn){
 
 /* ===== 방송 예약 탭 ===== */
 var GRADE_NAMES = ['G','C','B','A','S'];
-var USER_MAX_GRADE_IDX = 0; // 데모값 — 실제 서비스에선 유저가 보유한 실제 최고 등급으로 대체
+// 이 페이지는 로그인 연동이 없는 정적 가이드라 "보유 최고등급"을 알 수 없음 — 미리보기는 항상 클릭한 등급 그대로 반영.
+// [자동보정_등급상한](선택등급>보유최고등급 시 실제판정등급=보유최고등급)은 실제 서비스에서만 적용되는 로직.
 
-// 화면에서 직접 클릭해 고른 등급(선택 UI는 자유 — 파트너/장소/컨셉 목록 필터링은 전부 이 값 기준)
+// 화면에서 직접 클릭해 고른 등급(선택 UI는 자유 — 파트너/장소/컨셉 목록 필터링·요약 전부 이 값 기준)
 function currentGrade(){
   var el = document.querySelector('.gradecard.active');
   return el ? parseInt(el.dataset.grade, 10) : 0;
@@ -2100,12 +2101,12 @@ function currentGrade(){
 function currentGradeEl(){
   return document.querySelector('.gradecard.active');
 }
-// 실제 진행(판정)에 쓰이는 등급 — 보유 최고 등급 상한으로 자동 보정, 확정요약 계산에만 사용
+// 미리보기용=클릭한 등급 그대로(보정 없음)
 function effectiveGrade(){
-  return Math.min(currentGrade(), USER_MAX_GRADE_IDX);
+  return currentGrade();
 }
 function effectiveGradeEl(){
-  return document.querySelector('.gradecard[data-grade="'+effectiveGrade()+'"]');
+  return currentGradeEl();
 }
 
 // STEP1 등급 선택
@@ -2224,9 +2225,7 @@ function renderSummary(){
   var gradeName = gradeEl ? gradeEl.dataset.name : '(미선택)';
   var gem = gradeEl ? gradeEl.dataset.gem : '';
   var fee = gradeEl ? parseInt(gradeEl.dataset.fee, 10) : 0;
-  var rawIdx = currentGrade();
-  var wasCorrected = rawIdx > USER_MAX_GRADE_IDX;
-  var gradeLine = gradeName + '(' + gem + ')' + (wasCorrected ? '  ※ 선택 ' + GRADE_NAMES[rawIdx] + ' → 보유 최고 등급 ' + GRADE_NAMES[USER_MAX_GRADE_IDX] + '로 자동 보정' : '');
+  var gradeLine = gradeName + '(' + gem + ')';
 
   var customPartnerEl = document.getElementById('customPartner');
   var customPartnerVal = customPartnerEl ? customPartnerEl.value.trim() : '';
@@ -2336,4 +2335,3 @@ renderSummary();
 
 })();
 </script>
-
