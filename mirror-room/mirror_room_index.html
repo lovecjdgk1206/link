@@ -1,0 +1,2337 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LINK : 미러룸</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Manrope:wght@500;700;800&display=swap">
+<style>
+:root{
+  --bg:#0a090f;
+  --bg-2:#111019;
+  --surface:#16151f;
+  --surface-2:#1d1c29;
+  --line:#2b2a3a;
+  --line-soft:#211f2c;
+  --text:#eae7f2;
+  --text-dim:#9f9bb3;
+  --text-faint:#6e6a83;
+  --accent:#b98cff;
+  --accent-2:#ff8fd6;
+  --accent-soft:rgba(185,140,255,.14);
+  --g-g:#c9a6ff;
+  --g-c:#7cb8ff;
+  --g-b:#7dffc4;
+  --g-a:#ff7d8a;
+  --g-s:#f4f1ff;
+  --radius:14px;
+  --serif:'Gowun Dodum',serif;
+  --sans:'Gowun Dodum',-apple-system,sans-serif;
+  --mono:'Manrope','Gowun Dodum',sans-serif;
+  --panel:var(--surface);
+  --panel-2:var(--surface-2);
+  --panel-3:#211f2e;
+  --border:var(--line);
+  --border-soft:var(--line-soft);
+  --accent-strong:var(--accent-2);
+  --gold:#d9b46a;
+  --gold-soft:rgba(217,180,106,.14);
+  --ok:var(--g-b);
+  --radius-sm:9px;
+  --nav-bg:rgba(10,9,15,.78);
+  --on-accent:#160f22;
+  --on-gold:#160f22;
+  --accent-hover:#c8a4ff;
+}
+:root[data-theme="light"]{
+  --bg:#f8f6f1;
+  --bg-2:#efeae0;
+  --surface:#ffffff;
+  --surface-2:#f4f0e7;
+  --line:#e1dccf;
+  --line-soft:#eae5da;
+  --text:#221f2b;
+  --text-dim:#5c5768;
+  --text-faint:#8b8598;
+  --accent:#7c3aed;
+  --accent-2:#c2255c;
+  --accent-soft:rgba(124,58,237,.10);
+  --g-g:#9333ea;
+  --g-c:#2563eb;
+  --g-b:#16a34a;
+  --g-a:#dc2626;
+  --g-s:#27272a;
+  --panel-3:#ece6d9;
+  --gold:#a9762f;
+  --gold-soft:rgba(169,118,47,.12);
+  --nav-bg:rgba(250,248,244,.86);
+  --on-accent:#ffffff;
+  --on-gold:#ffffff;
+  --accent-hover:#6b32e0;
+}
+*{box-sizing:border-box;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  margin:0;
+  -webkit-font-smoothing:antialiased;
+  transition:background .2s,color .2s;
+}
+h1,h2,h3{font-family:var(--serif);text-wrap:balance;margin:0;}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+::selection{background:var(--accent-soft);color:var(--text);}
+
+/* ambient background */
+.bg-glow{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(700px 500px at 15% -5%, rgba(185,140,255,.16), transparent 60%),
+    radial-gradient(600px 460px at 100% 10%, rgba(255,143,214,.10), transparent 55%),
+    var(--bg);
+}
+.bg-lines{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+  background-image:repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px, transparent 1px, transparent 48px);
+}
+
+/* nav */
+nav.top{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+  background:var(--nav-bg);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+nav.top .row{
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;gap:8px;
+}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-weight:600;font-size:18px;letter-spacing:.02em;min-width:0;flex-shrink:1;overflow:hidden;white-space:nowrap;}
+.brand .mark{font-size:19px;filter:drop-shadow(0 0 6px rgba(185,140,255,.6));flex-shrink:0;}
+.brand .sub{color:var(--text-faint);font-family:var(--mono);font-size:12px;letter-spacing:.14em;margin-left:2px;}
+.page-tabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;}
+.page-tab{
+  font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--text-dim);
+  padding:7px 15px;border-radius:999px;cursor:pointer;transition:.2s;border:none;background:transparent;
+}
+.page-tab.active{background:var(--accent);color:var(--on-accent);font-weight:600;}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.theme-toggle{
+  flex:0 0 auto;width:38px;height:38px;border-radius:999px;border:1px solid var(--line);
+  background:var(--surface);color:var(--text);font-size:16px;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;transition:.15s;
+}
+.theme-toggle:hover{border-color:var(--accent);}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:7px 10px;font-size:18px;}
+@media (max-width:640px){
+  .page-tabs{
+    display:none;position:absolute;top:60px;left:12px;right:12px;
+    flex-direction:column;gap:4px;background:var(--surface);border:1px solid var(--line);
+    border-radius:14px;padding:8px;box-shadow:0 12px 30px rgba(0,0,0,.4);
+  }
+  .page-tabs.mobile-open{display:flex;}
+  .page-tabs .page-tab{width:100%;text-align:left;padding:10px 14px;}
+  .nav-toggle{display:inline-flex;}
+}
+@media (max-width:420px){
+  .brand{font-size:14.5px;gap:6px;}
+  .brand .sub{display:none;}
+}
+
+.page-view{display:none;}
+.page-view.active{display:block;}
+
+/* eyebrow */
+.eyebrow{
+  font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;
+}
+.eyebrow::before{content:'';width:16px;height:1px;background:var(--accent);}
+.eyebrow.pink{color:var(--accent-2);}
+.eyebrow.pink::before{background:var(--accent-2);}
+.eyebrow.dim{color:var(--text-faint);}
+.eyebrow.dim::before{background:var(--text-faint);}
+
+/* hero */
+.hero{padding:64px 0 40px;}
+.hero h1{font-size:clamp(36px,6vw,60px);line-height:1.18;font-weight:700;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hero p.lead{margin-top:18px;max-width:560px;color:var(--text-dim);font-size:17.5px;line-height:1.8;}
+.hero-actions{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap;}
+.btn{
+  font-family:var(--sans);font-weight:600;font-size:15.5px;padding:12px 22px;border-radius:10px;
+  border:1px solid var(--line);cursor:pointer;transition:.2s;
+}
+.btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);}
+.btn.primary:hover{background:var(--accent-hover,#c8a4ff);}
+.btn.ghost{background:transparent;color:var(--text);}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+.hero-readout{
+  margin-top:38px;display:grid;grid-template-columns:repeat(5,1fr);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface);
+}
+.hero-readout .cell{padding:14px 16px;border-right:1px solid var(--line);}
+.hero-readout .cell:last-child{border-right:none;}
+.hero-readout .cell .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--text-faint);text-transform:uppercase;}
+.hero-readout .cell .v{font-family:var(--mono);font-size:16px;margin-top:5px;color:var(--text);}
+@media (max-width:760px){
+  .hero-readout{grid-template-columns:repeat(2,1fr);}
+  .hero-readout .cell:nth-child(2n){border-right:none;}
+  .hero-readout .cell{border-bottom:1px solid var(--line);}
+}
+
+/* toc monitor grid */
+.toc-section{padding:20px 0 8px;}
+.monitor-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px;
+}
+@media (max-width:760px){.monitor-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:460px){.monitor-grid{grid-template-columns:1fr;}}
+.monitor-card{
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+  padding:18px;cursor:pointer;transition:.2s;position:relative;overflow:hidden;
+}
+.monitor-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.monitor-card .ch{font-family:var(--mono);font-size:12px;color:var(--text-faint);letter-spacing:.1em;display:flex;justify-content:space-between;}
+.monitor-card .ch .dot{width:6px;height:6px;border-radius:50%;background:var(--g-b);box-shadow:0 0 6px var(--g-b);}
+.monitor-card h3{font-size:18.5px;margin-top:12px;}
+.monitor-card p{font-size:14.5px;color:var(--text-dim);margin-top:6px;line-height:1.6;}
+
+/* section shell */
+section.doc{padding:56px 0;border-top:1px solid var(--line-soft);}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;}
+.sec-head h2{font-size:28px;}
+.sec-num{font-family:var(--mono);font-size:36px;color:var(--line);font-weight:600;}
+.sec-desc{margin-top:10px;color:var(--text-dim);font-size:16.5px;max-width:640px;line-height:1.8;}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+@media (max-width:800px){.grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:460px){.grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr;}}
+
+.panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:20px;}
+.panel h3{font-size:17.5px;margin-bottom:10px;}
+.panel p{font-size:15px;color:var(--text-dim);line-height:1.75;}
+.stat-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:15px;}
+.stat-row:last-child{border-bottom:none;}
+.stat-row .k{color:var(--text-faint);}
+.stat-row .v{font-family:var(--mono);color:var(--text);}
+
+/* grade cards */
+.grade-card{
+  border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:var(--surface);
+  border-top:3px solid var(--gc,var(--accent));
+}
+.grade-card .gem{font-size:24px;}
+.grade-card .letter{font-family:var(--mono);font-size:28px;font-weight:600;margin-top:6px;}
+.grade-card .rank{font-family:var(--mono);font-size:12px;color:var(--text-faint);letter-spacing:.08em;}
+.grade-card .name{font-size:15px;color:var(--text-dim);margin-top:2px;}
+.grade-card ul{list-style:none;margin:12px 0 0;padding:0;font-size:14px;color:var(--text-dim);line-height:1.8;}
+.grade-card li{padding-left:12px;border-left:1px solid var(--line);margin-bottom:6px;}
+.grade-card li b{color:var(--text);font-weight:500;}
+
+/* chips */
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.chip{
+  font-size:14px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);
+  color:var(--text-dim);background:var(--surface-2);
+}
+.chip.on{border-color:var(--accent);color:var(--accent);}
+
+/* theme cards (시나리오) */
+.theme-card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--surface);}
+.theme-card .t{font-family:var(--serif);font-weight:600;font-size:16px;}
+.theme-card .d{font-size:14px;color:var(--text-dim);margin-top:5px;line-height:1.6;}
+.theme-card.clickable{cursor:pointer;transition:.15s;}
+.theme-card.clickable:hover{border-color:var(--gold);}
+.theme-card.clickable.active{border-color:var(--gold);background:var(--gold-soft);}
+
+/* ptable */
+.ptable{width:100%;border-collapse:collapse;font-size:15px;}
+.ptable th,.ptable td{padding:11px 12px;border-bottom:1px solid var(--line-soft);text-align:left;}
+.ptable th{font-family:var(--mono);font-size:12.5px;color:var(--text-faint);letter-spacing:.08em;text-transform:uppercase;}
+.ptable td{color:var(--text-dim);font-family:var(--mono);font-size:14.5px;}
+.ptable td:first-child{color:var(--text);font-family:var(--sans);font-weight:500;}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);}
+.table-wrap .ptable{min-width:520px;}
+.table-wrap .ptable th:first-child,.table-wrap .ptable td:first-child{padding-left:18px;}
+
+.notice-strip{
+  border:1px solid var(--line);border-left:3px solid var(--accent-2);border-radius:10px;
+  padding:14px 18px;font-size:15px;color:var(--text-dim);background:var(--surface);line-height:1.7;
+}
+.priority-line{
+  font-family:var(--mono);font-size:14px;color:var(--text-dim);background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:12px 16px;line-height:1.9;
+  overflow-x:auto;white-space:nowrap;
+}
+.priority-line b{color:var(--accent);}
+
+/* command cards */
+.cmd-group{margin-top:26px;}
+.cmd-group .glabel{
+  font-family:var(--mono);font-size:13px;letter-spacing:.12em;color:var(--text-faint);
+  text-transform:uppercase;margin-bottom:12px;display:block;
+}
+.m-card{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface);transition:.2s;}
+.m-card:hover{border-color:var(--accent);}
+.m-tag{
+  font-family:var(--mono);font-size:13px;color:var(--accent);background:var(--accent-soft);
+  display:inline-block;padding:3px 9px;border-radius:6px;margin-bottom:9px;
+}
+.m-card h4{font-size:16.5px;font-family:var(--sans);font-weight:600;}
+.m-card p{font-size:14px;color:var(--text-dim);margin-top:5px;line-height:1.6;}
+
+/* character */
+.character-hero{padding:56px 0 24px;}
+.character-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.25;}
+.character-hero p{color:var(--text-dim);margin-top:14px;max-width:520px;font-size:16.5px;line-height:1.8;}
+
+.filter-row{display:flex;gap:8px;margin:26px 0 8px;flex-wrap:wrap;}
+.filter-btn{
+  font-family:var(--mono);font-size:13.5px;letter-spacing:.05em;color:var(--text-dim);
+  background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;
+}
+.filter-btn.active{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:600;}
+
+.operator-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 40px;}
+@media (max-width:640px){.operator-grid{grid-template-columns:1fr;}}
+.operator-card{
+  border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:linear-gradient(160deg,var(--surface-2),var(--surface));
+}
+.operator-card .role{font-family:var(--mono);font-size:12.5px;color:var(--accent-2);letter-spacing:.08em;}
+.operator-card h3{font-size:21px;margin-top:6px;}
+.operator-card p.desc{font-size:15px;color:var(--text-dim);margin-top:8px;line-height:1.75;}
+
+.character-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media (max-width:900px){.character-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:520px){.character-grid{grid-template-columns:1fr;}}
+.character-card{
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:18px;
+  transition:.2s;
+}
+.character-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.character-card .top{display:flex;justify-content:flex-end;align-items:flex-start;}
+.gbadge{font-family:var(--mono);font-size:12px;color:var(--text-faint);text-align:right;}
+.gbadge .gem{font-size:16px;}
+.character-card h3{font-size:19px;margin-top:12px;}
+.character-card .real{font-size:13.5px;color:var(--text-faint);margin-top:2px;font-family:var(--mono);}
+.character-card .flavor{font-size:14.5px;color:var(--text-dim);margin-top:10px;line-height:1.65;min-height:52px;}
+.character-card .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.character-card .tags span{
+  font-size:12.5px;padding:4px 9px;border-radius:999px;background:var(--surface-2);color:var(--text-dim);border:1px solid var(--line);
+}
+.character-card .heat{
+  display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--line-soft);
+  font-family:var(--mono);font-size:13px;color:var(--text-faint);
+}
+.character-card .heat b{color:var(--text);}
+
+.cta-block{
+  margin:50px 0 30px;padding:40px 30px;border-radius:var(--radius);text-align:center;
+  border:1px solid var(--line);background:radial-gradient(500px 260px at 50% 0%,rgba(185,140,255,.14),transparent 70%),var(--surface);
+}
+.cta-block h2{font-size:26px;}
+.cta-block p{color:var(--text-dim);margin-top:10px;font-size:15.5px;}
+
+footer{border-top:1px solid var(--line);padding:36px 0 48px;margin-top:20px;}
+footer .fnote{font-size:13.5px;color:var(--text-faint);line-height:1.9;max-width:720px;}
+footer .fbrand{font-family:var(--serif);font-size:16px;color:var(--text-dim);margin-bottom:10px;}
+
+/* ===== ported from mirror_room_profile.html (유저 프로필 / 취향표 / 방송예약) ===== */
+
+.wrap-narrow{max-width:720px; margin:0 auto; padding-inline:18px;}
+.mono{font-family:var(--mono);}
+
+
+
+
+section.block{padding:26px 0;}
+
+.card{
+  background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+  padding:18px; margin-bottom:14px;
+}
+.card + .card{margin-top:14px;}
+.card h3{font-size:17.5px; margin-bottom:4px;}
+.card .desc{font-size:14.5px; color:var(--text-dim); margin-top:4px; margin-bottom:14px;}
+
+/* profile fields */
+.field{margin-bottom:14px;}
+.field label{display:block; font-size:14.5px; color:var(--text-dim); margin-bottom:6px;}
+.field input, .field textarea{
+  width:100%; background:var(--panel-2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  color:var(--text); font-family:var(--sans); font-size:16px; padding:10px 12px; outline:none;
+}
+.field input:focus, .field textarea:focus{border-color:var(--accent);}
+.field textarea{resize:vertical; min-height:64px;}
+.field.safe input{border-color:rgba(178,58,74,.45);}
+.field.custom-partner{margin-top:14px; padding-top:14px; border-top:1px dashed var(--border);}
+.example-box{
+  background:var(--panel-2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  color:var(--text-dim); font-size:13.5px; line-height:1.6; padding:9px 11px; margin:0 0 8px;
+}
+.copybtn{
+  width:100%; margin-top:10px; padding:11px; border-radius:var(--radius-sm); border:1px solid var(--accent);
+  background:transparent; color:var(--accent); font-family:var(--sans); font-size:15.5px; font-weight:600;
+  cursor:pointer; transition:.15s;
+}
+.copybtn:hover{background:var(--accent); color:#fff;}
+.copybtn.copied{background:var(--accent); color:#fff; border-color:var(--accent);}
+.copy-guide{font-size:13.5px; color:var(--text-faint); text-align:center; margin-top:8px; line-height:1.5;}
+
+.hint{font-size:13.5px; color:var(--text-faint); margin-top:10px; line-height:1.55;}
+.hint b{color:var(--text-dim); font-weight:500;}
+
+/* chip groups (톤 / 등급) */
+.chipgroup{display:flex; flex-wrap:wrap; gap:8px;}
+.tchip{
+  font-family:var(--mono); font-size:14.5px; letter-spacing:.02em; padding:8px 14px;
+  border-radius:999px; border:1px solid var(--border); background:var(--panel-2); color:var(--text-dim);
+  cursor:pointer; transition:.12s; user-select:none;
+}
+.tchip:hover{color:var(--text); border-color:var(--text-faint);}
+.tchip.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+
+.tiergroup{display:flex; gap:6px;}
+.tiergroup .tchip{flex:1; text-align:center; font-family:var(--serif); font-weight:600; font-size:15.5px;}
+
+.subgroup{margin-bottom:14px;}
+.subgroup:last-child{margin-bottom:0;}
+.subgroup .sublabel{font-size:13.5px; color:var(--text-faint); margin-bottom:8px; font-family:var(--mono);}
+
+/* ===== 취향 체크리스트(카테고리 + 레이팅) ===== */
+.checklist-head{margin-bottom:12px;}
+.legend{
+  display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--text-faint);
+  font-family:var(--mono); margin-top:10px; padding:10px 12px; background:var(--panel-2);
+  border-radius:var(--radius-sm); border:1px solid var(--border-soft);
+}
+.legend span{display:inline-flex; align-items:center; gap:5px;}
+.legend i{
+  display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px;
+  border-radius:5px; border:1px solid var(--border); font-style:normal; font-size:11.5px;
+}
+
+.reco-box{
+  margin-top:10px; padding:12px 13px; background:var(--gold-soft); border:1px solid rgba(200,164,99,.35);
+  border-radius:var(--radius-sm); font-size:14px; color:var(--text-dim); line-height:1.65;
+}
+.reco-box b{color:var(--gold); font-weight:600;}
+.reco-box p + p{margin-top:6px;}
+
+.category{border:1px solid var(--border-soft); border-radius:var(--radius-sm); margin-bottom:10px; overflow:hidden; background:var(--panel-2);}
+.category:last-child{margin-bottom:0;}
+.category summary{
+  list-style:none; cursor:pointer; padding:13px 14px; display:flex; align-items:center;
+  justify-content:space-between; gap:10px; font-family:var(--serif); font-size:16px; font-weight:600;
+}
+.category summary::-webkit-details-marker{display:none;}
+.category summary .n{font-family:var(--mono); font-weight:400; font-size:12.5px; color:var(--text-faint);}
+.category summary::after{content:'+'; font-family:var(--mono); font-size:18px; color:var(--text-faint); transition:.15s;}
+.category[open] summary::after{content:'−';}
+.category .cat
+.kink-row{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding:9px 0; border-top:1px solid var(--border-soft);
+}
+.kink-row:first-child{border-top:none;}
+.kink-row .label{font-size:15px; color:var(--text); flex:1; min-width:0;}
+.rate{display:flex; gap:4px; flex:0 0 auto;}
+.rate button{
+  width:28px; height:28px; border-radius:7px; border:1px solid var(--border); background:var(--panel-3);
+  color:var(--text-faint); font-size:14px; cursor:pointer; padding:0; line-height:1;
+}
+.rate button[data-v="0"].active{background:var(--panel-3); border-color:var(--text-faint); color:var(--text-dim);}
+.rate button[data-v="1"].active{background:var(--gold-soft); border-color:var(--gold); color:var(--gold);}
+.rate button[data-v="2"].active{background:var(--accent-soft); border-color:var(--accent); color:var(--accent-strong);}
+.rate button[data-v="3"].active{background:var(--accent-strong); border-color:var(--accent-strong); color:#fff;}
+
+/* 용어 설명 토글 */
+.term-toggle{
+  flex:0 0 auto; width:20px; height:20px; border-radius:50%; border:1.5px solid var(--accent);
+  background:var(--accent-soft); color:var(--accent); font-family:var(--mono); font-size:13px; font-weight:600;
+  cursor:pointer; padding:0; line-height:1; transition:.12s;
+}
+.term-toggle:hover{color:var(--on-accent); background:var(--accent); border-color:var(--accent);}
+.term-toggle.open{background:var(--gold); border-color:var(--gold); color:var(--on-gold);}
+.term-desc{
+  font-size:13.5px; color:var(--text-faint); line-height:1.55; padding:0 0 10px 2px;
+}
+
+.category.locked .cat.category.spicy summary{color:var(--accent-strong);}
+.lockmsg{font-size:13px; color:var(--accent-strong); font-family:var(--mono); padding:8px 0 4px;}
+
+.savebar{
+  position:sticky; bottom:0; margin-top:6px; padding:12px 0 0;
+  background:linear-gradient(to top, var(--bg) 60%, transparent);
+}
+.savebtn{
+  width:100%; padding:14px; border-radius:999px; border:none; background:var(--accent-strong);
+  color:#fff; font-family:var(--serif); font-weight:600; font-size:17px; cursor:pointer;
+}
+.savebtn:hover{background:var(--accent);}
+.savebtn.saved{background:var(--ok); color:#0c1a10;}
+
+/* ===== 방송 예약 탭 ===== */
+.step-label{font-family:var(--mono); font-size:12.5px; color:var(--gold); letter-spacing:.08em; margin-bottom:8px; display:block;}
+
+.gradegrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(84px,1fr)); gap:8px;}
+.gradecard{
+  border:1px solid var(--border); background:var(--panel-2); border-radius:var(--radius-sm);
+  padding:10px 6px; text-align:center; cursor:pointer; transition:.12s;
+}
+.gradecard .gname{display:block; font-family:var(--serif); font-weight:700; font-size:19px; color:var(--text);}
+.gradecard .ggem{display:block; font-family:var(--mono); font-size:11px; color:var(--text-faint); margin-top:2px;}
+.gradecard .gsub{display:block; font-family:var(--mono); font-size:10.8px; color:var(--text-faint); margin-top:6px; line-height:1.45;}
+.gradecard:hover{border-color:var(--text-faint);}
+.gradecard.active{background:var(--accent); border-color:var(--accent);}
+.gradecard.active .gname, .gradecard.active .ggem, .gradecard.active .gsub{color:#fff;}
+
+.tchip.locked-chip{opacity:.32; pointer-events:none;}
+
+.place-toggle{display:flex; gap:8px; margin-bottom:10px;}
+.placegrid{display:flex; flex-wrap:wrap; gap:8px;}
+.placegrid .tchip[hidden]{display:none;}
+
+.concept-cat{margin-bottom:14px;}
+.concept-cat:last-child{margin-bottom:0;}
+.concept-cat .catlabel{font-family:var(--mono); font-size:12.5px; color:var(--text-faint); margin-bottom:7px; display:block;}
+.concept-cat .chipgroup .tchip.active{background:var(--gold); border-color:var(--gold); color:var(--on-gold);}
+
+.presetlist{display:flex; flex-direction:column; gap:8px; margin-top:6px;}
+.preset{
+  border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--panel-2);
+  padding:11px 13px; cursor:pointer; transition:.12s;
+}
+.preset:hover{border-color:var(--gold);}
+.preset.active{border-color:var(--gold); background:var(--gold-soft);}
+.preset .t{font-family:var(--serif); font-size:15px; font-weight:600;}
+.preset .k{font-family:var(--mono); font-size:13px; color:var(--text-faint); margin-top:4px;}
+.preset.locked-chip{opacity:.35; pointer-events:none;}
+
+.goal-detail{
+  margin-top:10px; padding:10px 12px; background:var(--panel-2); border:1px solid var(--border-soft);
+  border-radius:var(--radius-sm); font-size:14.5px; color:var(--text-dim); font-family:var(--mono);
+}
+
+.booking-summary{
+  white-space:pre-wrap; font-family:var(--mono); font-size:14px; line-height:1.75; color:var(--text);
+  background:var(--panel-2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  padding:14px 15px; margin:0;
+}
+.booking-summary .blank{color:var(--text-faint);}
+
+/* 매직미러 컨트롤 */
+.mirror-card{border-color:rgba(200,164,99,.35);}
+.mirror-demo{
+  display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px;
+  background:var(--panel-2); border:1px solid var(--border-soft); border-radius:var(--radius-sm); margin-top:10px;
+}
+.mirror-state{font-family:var(--serif); font-weight:600; font-size:16px;}
+.mirror-state small{display:block; font-family:var(--sans); font-weight:400; font-size:13.5px; color:var(--text-dim); margin-top:3px;}
+.mirror-switch{
+  flex:0 0 auto; width:56px; height:30px; border-radius:999px; border:1px solid var(--border);
+  background:var(--panel-3); position:relative; cursor:pointer; transition:.2s;
+}
+.mirror-switch .knob{
+  position:absolute; top:2px; left:2px; width:24px; height:24px; border-radius:50%;
+  background:var(--text-dim); transition:.2s;
+}
+.mirror-switch.on{background:var(--gold-soft); border-color:var(--gold);}
+.mirror-switch.on .knob{left:28px; background:var(--gold);}
+
+/* ===== 모바일 가독성 보강 ===== */
+@media (max-width:480px){
+  .wrap{padding:0 16px;}
+  .wrap-narrow{padding-inline:16px;}
+  body{font-size:15px;}
+  .hero{padding:44px 0 30px;}
+  .hero p.lead{font-size:16px;line-height:1.75;}
+  .sec-desc{font-size:15.5px;}
+  .panel p,.m-card p,.theme-card .d,.character-card .flavor,.notice-strip,.card .desc,.hint,
+  .operator-card p.desc,.character-hero p,.reco-box{font-size:15px;line-height:1.7;}
+  .ptable{font-size:14.5px;}
+  .ptable th,.ptable td{padding:10px 8px;}
+  .chip,.tchip{font-size:14.5px;padding:8px 13px;}
+  .stat-row{font-size:14.5px;}
+  .hero-readout{grid-template-columns:1fr;}
+  .hero-readout .cell{border-right:none;border-bottom:1px solid var(--line);}
+  .hero-readout .cell:last-child{border-bottom:none;}
+  .kink-row .label{font-size:15.5px;}
+  .theme-card .t{font-size:16.5px;}
+  .theme-card{padding:16px 16px;}
+  .m-card h4{font-size:17px;}
+  .m-card{padding:18px;}
+  .character-card .flavor{min-height:0;font-size:15px;}
+  .character-card h3{font-size:20px;}
+  .sec-head h2{font-size:24px;}
+  .sec-num{font-size:28px;}
+  .panel{padding:18px;}
+  .card{padding:16px;}
+  .field label{font-size:15px;}
+  .booking-summary{font-size:14.5px;}
+  .goal-detail{font-size:15px;}
+}
+
+</style>
+
+<div class="bg-glow"></div>
+<div class="bg-lines"></div>
+
+<nav class="top">
+  <div class="wrap row">
+    <div class="brand">
+      <span class="mark">🪞</span>LINK : 미러룸<span class="sub">MIRROR BOX</span>
+    </div>
+    <div class="page-tabs" role="tablist">
+      <button class="page-tab active" data-page="guide">가이드</button>
+      <button class="page-tab" data-page="commands">명령어</button>
+      <button class="page-tab" data-page="cast">파트너</button>
+      <button class="page-tab" data-page="profile">프로필</button>
+      <button class="page-tab" data-page="booking">방송예약</button>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크/화이트 모드 전환">🌙</button>
+      <button class="nav-toggle" id="navToggle">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= PAGE 1 : GUIDE ================= -->
+<main id="page-guide" class="page-view active">
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">MEMBERS-ONLY BROADCAST TOWER</div>
+      <h1>보이지 않는 유리 너머,<br><em>미러박스</em>가 방송을 시작합니다.</h1>
+      <p class="lead">
+        회원제 방송타워 미러박스. 각 층은 등급별로 접근이 제한된 하나의 방송 채널입니다.
+        오늘은 당신이 유리 안(호스트)에 서는 날일 수도, 유리 밖(관전자)에서 지켜보는 날일 수도 있습니다.
+      </p>
+      <div class="hero-actions">
+        <button class="btn primary" data-jump="sec-grade">미러룸 등급 보기</button>
+        <button class="btn ghost" data-jump="sec-economy">경제 시스템 보기</button>
+        <button type="button" class="btn ghost" data-jump-page="booking">지금 방송 예약하기</button>
+      </div>
+
+      <div class="hero-readout">
+        <div class="cell"><div class="k">Rank</div><div class="v">S 1급 · G 5급</div></div>
+        <div class="cell"><div class="k">활동온도</div><div class="v">0.0 – 100.0</div></div>
+        <div class="cell"><div class="k">화폐</div><div class="v">커미션(C)</div></div>
+        <div class="cell"><div class="k">캐스팅</div><div class="v">16 PARTNERS</div></div>
+        <div class="cell"><div class="k">시야</div><div class="v">매직미러 / 투명</div></div>
+      </div>
+    </section>
+
+    <section class="toc-section">
+      <div class="eyebrow pink">TOWER INDEX</div>
+      <h2 style="font-size:24px;">무엇부터 볼까요</h2>
+      <div class="monitor-grid">
+        <div class="monitor-card" data-jump="sec-system"><div class="ch">CH-01<span class="dot"></span></div><h3>시스템 개요</h3><p>호스트↔이용자 자유 전환, 활동온도, 매직미러 시야 구조</p></div>
+        <div class="monitor-card" data-jump="sec-grade"><div class="ch">CH-02<span class="dot"></span></div><h3>미러룸 등급</h3><p>G·C·B·A·S 5단계, 등급별 장소·자극수위·부킹비</p></div>
+        <div class="monitor-card" data-jump="sec-goal"><div class="ch">CH-03<span class="dot"></span></div><h3>방송 목표</h3><p>정량형·시나리오완주형 타이틀 시스템과 12가지 톤</p></div>
+        <div class="monitor-card" data-jump="sec-economy"><div class="ch">CH-04<span class="dot"></span></div><h3>경제 시스템</h3><p>미션금·부킹비·지명료·독점계약, 커미션의 흐름</p></div>
+        <div class="monitor-card" data-jump="sec-safety"><div class="ch">CH-05<span class="dot"></span></div><h3>안전장치</h3><p>세이프워드·하드리밋, 절대 흔들리지 않는 우선순위</p></div>
+      </div>
+    </section>
+
+    <!-- 01 시스템 -->
+    <section class="doc" id="sec-system">
+      <div class="sec-head">
+        <div><div class="eyebrow">CH-01 · SYSTEM</div><h2>시스템 개요</h2></div>
+        <div class="sec-num">01</div>
+      </div>
+      <p class="sec-desc">미러박스에는 고정된 편이 없습니다. 같은 유저가 오늘은 호스트, 내일은 관전자가 됩니다.</p>
+
+      <div class="grid-2" style="margin-top:30px;">
+        <div class="panel">
+          <h3>🎬 호스트 / 이용자</h3>
+          <p>호스트 — 채널을 예약하고 파트너를 선택해 방송을 진행, 미션을 수행하고 커미션을 얻습니다.</p>
+          <p style="margin-top:8px;">이용자 — 보유 커미션으로 다른 채널을 관전하거나 미션에 개입하고, 파트너를 예약할 수 있습니다.</p>
+        </div>
+        <div class="panel">
+          <h3>🪞 매직미러 시스템</h3>
+          <p>기본값은 편도거울 — 방 안(호스트)에선 바깥이 보이지 않고, 바깥(관전자)에선 안이 보입니다.</p>
+          <div class="chip-row">
+            <span class="chip on">매직미러 (기본)</span>
+            <span class="chip">양방향 투명 전환</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>🌡️ 활동온도</h3>
+        <p>유저와 파트너 전원에게 적용되는 단일 성장 스탯. 0.0 ~ 100.0, 소수점 1자리까지 표기하며 100.0이 상한입니다.
+        채널 등급 게이트와 시즌 랭킹 집계 기준이 되며, 채널 자체의 "인기"와는 완전히 다른 축입니다.</p>
+        <div class="chip-row">
+          <span class="chip">C 15↑</span><span class="chip">B 35↑</span><span class="chip">A 60↑</span><span class="chip">S 85↑</span>
+          <span class="chip" style="border-color:var(--accent);color:var(--accent);">G는 게이트 없음</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 채널등급 -->
+    <section class="doc" id="sec-grade">
+      <div class="sec-head">
+        <div><div class="eyebrow">CH-02 · CHANNEL GRADE</div><h2>미러룸 등급</h2></div>
+        <div class="sec-num">02</div>
+      </div>
+      <p class="sec-desc">등급은 레터로 표기하고, 보석색 이모지는 아이콘·뱃지 전용입니다. 1급이 최상위입니다.</p>
+
+      <div class="grid-5" style="margin-top:30px;">
+        <div class="grade-card" style="--gc:var(--g-g);">
+          <div class="gem">💜</div><div class="letter">G</div><div class="rank">5급 · GUEST</div><div class="name">자수정</div>
+          <ul><li><b>게이트</b> 없음(입문)</li><li><b>부킹비</b> 10C</li><li><b>자극</b> 장난감·손장난·관장</li></ul>
+        </div>
+        <div class="grade-card" style="--gc:var(--g-c);">
+          <div class="gem">💙</div><div class="letter">C</div><div class="rank">4급</div><div class="name">사파이어</div>
+          <ul><li><b>게이트</b> 15↑</li><li><b>부킹비</b> 20C</li><li><b>자극</b> 입문 BDSM</li></ul>
+        </div>
+        <div class="grade-card" style="--gc:var(--g-b);">
+          <div class="gem">💚</div><div class="letter">B</div><div class="rank">3급</div><div class="name">에메랄드</div>
+          <ul><li><b>게이트</b> 35↑</li><li><b>부킹비</b> 50C</li><li><b>자극</b> 오랄·딥스로트</li></ul>
+        </div>
+        <div class="grade-card" style="--gc:var(--g-a);">
+          <div class="gem">❤️</div><div class="letter">A</div><div class="rank">2급</div><div class="name">루비</div>
+          <ul><li><b>게이트</b> 60↑</li><li><b>부킹비</b> 120C</li><li><b>자극</b> 오르가즘 컨트롤</li></ul>
+        </div>
+        <div class="grade-card" style="--gc:var(--g-s);">
+          <div class="gem">💎</div><div class="letter">S</div><div class="rank">1급 · OWNERS</div><div class="name">다이아몬드</div>
+          <ul><li><b>게이트</b> 85↑</li><li><b>부킹비</b> 300C</li><li><b>자극</b> 완전 개방</li></ul>
+        </div>
+      </div>
+
+      <div class="notice-strip" style="margin-top:16px;">
+        런칭 시점엔 G~B까지만 열려 있습니다. A·S 채널은 "곧 개장" 상태로 잠겨 있으며,
+        유저 자신의 등급이 오를수록 함께 열립니다 — 등급 표는 예시일 뿐, 그 등급 분위기에 맞는 새로운 장소·연출은 자유롭게 추가될 수 있습니다.
+      </div>
+    </section>
+
+    <!-- 03 방송목표 -->
+    <section class="doc" id="sec-goal">
+      <div class="sec-head">
+        <div><div class="eyebrow">CH-03 · BROADCAST GOAL</div><h2>방송 목표 · 타이틀 시스템</h2></div>
+        <div class="sec-num">03</div>
+      </div>
+      <p class="sec-desc">방송을 시작하며 "타이틀"을 걸면, 그 목표를 달성할 때까지 방송이 이어집니다.</p>
+
+      <div class="grid-2" style="margin-top:30px;">
+        <div class="panel">
+          <h3>📈 정량형</h3>
+          <p>시청자 수, 혹은 후원 누적 금액 같은 수치 목표에 도달할 때까지 진행합니다.</p>
+          <div class="stat-row"><span class="k">시청자형</span><span class="v">G 30 · C 60 · B 120 · A 250 · S 500명</span></div>
+          <div class="stat-row"><span class="k">후원누적형</span><span class="v">그 채널 미션금 하한×5</span></div>
+        </div>
+        <div class="panel">
+          <h3>🎭 시나리오완주형</h3>
+          <p>특정 상황극을 시작해서 마무리까지 완주하는 고정 미션 시퀀스입니다. 그 채널 등급의 자극수위·장소 범위 안에서 설계됩니다.</p>
+        </div>
+      </div>
+
+      <div class="eyebrow dim" style="margin-top:34px;">THEME POOL</div>
+      <div class="grid-3" style="margin-top:14px;">
+        <div class="theme-card"><div class="t">교류형</div><div class="d">관전자 채팅·개입 비중을 높여 진행</div></div>
+        <div class="theme-card"><div class="t">체험형</div><div class="d">소품·플레이 하나에 집중하는 회차</div></div>
+        <div class="theme-card"><div class="t">관찰형</div><div class="d">개입 최소화, 조용한 밀착 관찰 톤</div></div>
+        <div class="theme-card"><div class="t">경쟁형</div><div class="d">시간·조건 제한으로 긴장감 부여</div></div>
+        <div class="theme-card"><div class="t">교육형</div><div class="d">입문자를 이끄는 멘토링 톤</div></div>
+        <div class="theme-card"><div class="t">매칭형</div><div class="d">그날 첫 지명 파트너와의 "첫 합"</div></div>
+        <div class="theme-card"><div class="t">축제형</div><div class="d">시즌 이벤트와 연동된 화려한 연출</div></div>
+        <div class="theme-card"><div class="t">커뮤니티형</div><div class="d">팬덤게시판 반응을 실시간 반영</div></div>
+        <div class="theme-card"><div class="t">커플형</div><div class="d">독점계약 파트너와의 합방 전용 톤</div></div>
+        <div class="theme-card"><div class="t">롤플레잉형</div><div class="d">관계 설정을 끝까지 유지하는 몰입형</div></div>
+        <div class="theme-card"><div class="t">훈육형</div><div class="d">지적→벌→승복의 상황극 흐름</div></div>
+        <div class="theme-card"><div class="t">게임형</div><div class="d">주사위·확률에 맡기는 랜덤 전개</div></div>
+      </div>
+    </section>
+
+    <!-- 04 경제 -->
+    <section class="doc" id="sec-economy">
+      <div class="sec-head">
+        <div><div class="eyebrow">CH-04 · ECONOMY</div><h2>경제 시스템</h2></div>
+        <div class="sec-num">04</div>
+      </div>
+      <p class="sec-desc">단위는 커미션(C). 미션이 끝나는 즉시 그 자리에서 한 번만 계산됩니다 — 흔들림 없는 정산.</p>
+
+      <div class="table-wrap" style="margin-top:26px;">
+        <table class="ptable">
+          <tr><th>등급</th><th>미션금</th><th>부킹비</th><th>지명료 가산</th></tr>
+          <tr><td>💜 G</td><td>10 ~ 30C</td><td>10C</td><td>인기 +50% · 일반 +30%</td></tr>
+          <tr><td>💙 C</td><td>30 ~ 80C</td><td>20C</td><td>인기 +50% · 일반 +30%</td></tr>
+          <tr><td>💚 B</td><td>80 ~ 200C</td><td>50C</td><td>인기 +50% · 일반 +30%</td></tr>
+          <tr><td>❤️ A</td><td>200 ~ 500C</td><td>120C</td><td>인기 +50% · 일반 +30%</td></tr>
+          <tr><td>💎 S</td><td>500 ~ 1,500C</td><td>300C</td><td>조율권으로 상한 없음</td></tr>
+        </table>
+      </div>
+
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="panel">
+          <h3>💰 정산 구조</h3>
+          <p>하우스컷(클리닝비) 20%를 공통 차감한 뒤, 남은 금액을 호스트-파트너 1/N(참여 2인 기준 50/50)로 분배합니다.</p>
+        </div>
+        <div class="panel">
+          <h3>🔒 독점계약</h3>
+          <p>같은 파트너를 3회 이상 지명하면 체결 자격이 생깁니다. 기간은 1일/1주/1개월/시즌 전체 중 선택, 계약 중엔 커플템 착용이 필수입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 안전장치 -->
+    <section class="doc" id="sec-safety">
+      <div class="sec-head">
+        <div><div class="eyebrow">CH-05 · SAFETY</div><h2>안전장치</h2></div>
+        <div class="sec-num">05</div>
+      </div>
+      <p class="sec-desc">강요·폭주·비동의 진행 금지는 미러박스 전체 규칙의 최상단에 고정되어 있습니다.</p>
+
+      <div class="grid-2" style="margin-top:26px;">
+        <div class="panel">
+          <h3>📝 방송 예약시 필수 기재</h3>
+          <p>절대 금지 사항(하드리밋)과 세이프워드는 둘 다 반드시 적어야 합니다. 미기재 시 예약이 진행되지 않습니다.</p>
+        </div>
+        <div class="panel">
+          <h3>🆘 세이프콜</h3>
+          <p>세이프워드가 발동되면 진행 중이던 모든 판정을 무시하고 즉시 중단합니다. 매니저 송지아가 최우선 대응, 상황이 심각하면 MASTER가 직접 개입합니다.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="fbrand">🪞 LINK : 미러룸</div>
+      <p class="fnote">
+        본 페이지는 성인(19세 이상) 전용 인터랙티브 창작물 "LINK : 미러룸"의 세계관 소개 자료입니다.
+        등장인물 전원은 성인이며 모든 관계와 행위는 상호 동의를 전제로 합니다. 실제 서비스·거래·인물과 무관한 허구의 설정입니다.
+      </p>
+    </div>
+  </footer>
+</main>
+
+<!-- ================= PAGE 2 : COMMANDS ================= -->
+<main id="page-commands" class="page-view">
+  <div class="wrap">
+    <section class="hero" style="padding-bottom:20px;">
+      <div class="eyebrow pink">COMMAND REFERENCE</div>
+      <h1 style="font-size:clamp(30px,5vw,44px);">필요할 때 부르는<br>말들.</h1>
+      <p class="lead">발동어 하나로 진행 흐름·수위·연출을 즉시 조정합니다.</p>
+    </section>
+
+    <section class="cmd-group">
+      <span class="glabel">GROUP A · 정보 조회</span>
+      <div class="grid-3">
+        <div class="m-card"><div class="m-tag">미러박스 / !미러박스</div><h4>메인 메뉴</h4><p>보유 커미션·활동온도·MENU 9종 진입점</p></div>
+        <div class="m-card"><div class="m-tag">로비 / !로비</div><h4>로비</h4><p>현재 생방송 채널 목록, 팬덤지수 TOP3 추천</p></div>
+        <div class="m-card"><div class="m-tag">관전 / !관전</div><h4>관전</h4><p>관전자모드 즉시진입, LIVE 채널 목록 확인</p></div>
+        <div class="m-card"><div class="m-tag">취향표 / !취향표</div><h4>취향표</h4><p>51항목 플레이취향(X·?·O·♥) 확인·수정</p></div>
+        <div class="m-card"><div class="m-tag">내정보 / !내정보</div><h4>내 프로필</h4><p>활동명·관전자ID·등급·커미션 현황</p></div>
+        <div class="m-card"><div class="m-tag">파트너현황 / !파트너현황</div><h4>파트너 현황</h4><p>지명 가능한 파트너, 히든 해금 여부</p></div>
+        <div class="m-card"><div class="m-tag">커미션내역 / !커미션내역</div><h4>커미션 내역</h4><p>최근 정산 3~5건, 거부 페널티 포함</p></div>
+        <div class="m-card"><div class="m-tag">채널등급 / !채널등급</div><h4>채널등급 / 시설</h4><p>해금된 등급별 대표 장소·부킹비</p></div>
+        <div class="m-card"><div class="m-tag">아이템 / !아이템</div><h4>아이템</h4><p>보유중인 커플템 등 표시</p></div>
+        <div class="m-card"><div class="m-tag">팬덤게시판 / !팬덤게시판</div><h4>팬덤게시판</h4><p>커플링 커뮤니티 피드, 코어팬덤 TOP3</p></div>
+        <div class="m-card"><div class="m-tag">독점계약 / !독점계약</div><h4>독점계약</h4><p>대상·기간·계약비 현황</p></div>
+        <div class="m-card"><div class="m-tag">관계 / !관계</div><h4>관계</h4><p>파트너별 활동온도·지명횟수·계약상태 압축 출력</p></div>
+        <div class="m-card"><div class="m-tag">시선 / !시선</div><h4>시선</h4><p>현재 누가 의식·관찰중인지 압축 출력</p></div>
+      </div>
+    </section>
+
+    <section class="cmd-group">
+      <span class="glabel">GROUP B · 진행 제어</span>
+      <div class="grid-3">
+        <div class="m-card"><div class="m-tag">방송예약 / !방송예약</div><h4>방송 예약</h4><p>등급→파트너→목표→장소→컨셉→안전장치 STEP1~6</p></div>
+        <div class="m-card"><div class="m-tag">장면전환 / !전환</div><h4>장면전환</h4><p>현재 장면 마무리 후 다음으로 이동</p></div>
+        <div class="m-card"><div class="m-tag">관전흐름 / 전개가속</div><h4>관전흐름</h4><p>관전 정체·반복 즉시 해소, 자율진행 가속</p></div>
+        <div class="m-card"><div class="m-tag">관전흐름복구</div><h4>관전흐름복구</h4><p>반복질문·대기 중단, 다음 장면으로 즉시 진행</p></div>
+        <div class="m-card"><div class="m-tag">유저사칭복구</div><h4>유저사칭복구</h4><p>AI가 임의로 쓴 유저 대사·행동 무효화</p></div>
+        <div class="m-card"><div class="m-tag">상황재설정</div><h4>상황재설정</h4><p>설정충돌·캐릭터붕괴·규칙오류 등 수정</p></div>
+        <div class="m-card"><div class="m-tag">오류 / !오류</div><h4>오류</h4><p>즉석 경량 복구, 상황재설정보다 가벼움</p></div>
+        <div class="m-card"><div class="m-tag">상태동기화 / 수치복구</div><h4>상태동기화</h4><p>활동온도·커미션·LOCK 등 수치만 최신값으로 복구</p></div>
+        <div class="m-card"><div class="m-tag">UI복구 / !UI / 상태창복구</div><h4>UI복구</h4><p>상태창(UI) 서식만 즉시 재적용</p></div>
+        <div class="m-card"><div class="m-tag">시스템점검</div><h4>시스템점검</h4><p>현재 상태·관계·붕괴 여부 1회 점검</p></div>
+        <div class="m-card"><div class="m-tag">시스템재적용</div><h4>시스템재적용</h4><p>세션 상태 유지한 채 최신 규칙 재적용</p></div>
+        <div class="m-card"><div class="m-tag">이어받기 / !이어받기</div><h4>이어받기</h4><p>새 세션 인계용 압축 상태 출력</p></div>
+        <div class="m-card"><div class="m-tag">요약 / !요약</div><h4>요약</h4><p>진행 요약 + 체크포인트 고정</p></div>
+        <div class="m-card"><div class="m-tag">이벤트 / !이벤트</div><h4>이벤트</h4><p>지금 진행 가능한 이벤트·트리거 확인(강제 발생 아님)</p></div>
+      </div>
+    </section>
+
+    <section class="cmd-group">
+      <span class="glabel">GROUP C · 톤 · 수위</span>
+      <div class="grid-3">
+        <div class="m-card"><div class="m-tag">플레이결 / !톤설정</div><h4>플레이 결</h4><p>생활형 · 플러팅형 · 텐션형 진행 톤 지정</p></div>
+        <div class="m-card"><div class="m-tag">저수위 / 고수위</div><h4>수위조절</h4><p>등급 상한 안에서 서술 강도만 조정</p></div>
+        <div class="m-card"><div class="m-tag">감정중심 / 묘사중심</div><h4>표현 방식</h4><p>심리 비중 ↕ / 신체·오감 비중 ↕</p></div>
+        <div class="m-card"><div class="m-tag">서술강화 / !서술강화</div><h4>서술강화</h4><p>반복 표현 즉시 보정</p></div>
+      </div>
+    </section>
+
+    <section class="cmd-group">
+      <span class="glabel">GROUP D · 특수 연출</span>
+      <div class="grid-3">
+        <div class="m-card"><div class="m-tag">상태 / !상태</div><h4>상태</h4><p>현재 장면 인물의 상황·신체상태 출력</p></div>
+        <div class="m-card"><div class="m-tag">속마음 / !일기</div><h4>속마음일기</h4><p>OOC로 캐릭터 내심을 1회 노출</p></div>
+        <div class="m-card"><div class="m-tag">폰훔쳐보기</div><h4>폰훔쳐보기</h4><p>대상 몰래 휴대폰 화면 확인 연출</p></div>
+        <div class="m-card"><div class="m-tag">모브등장 / !모브등장</div><h4>모브등장</h4><p>질투·긴장 연출용 배경인물 일시 등장</p></div>
+        <div class="m-card"><div class="m-tag">미션정리</div><h4>미션정리</h4><p>진행중 미션 500자 내외 요약</p></div>
+        <div class="m-card"><div class="m-tag">이미지 / !이미지온</div><h4>이미지출력</h4><p>주요 장면 이미지 생성 토글</p></div>
+        <div class="m-card"><div class="m-tag">포커스집중 / !포커스집중</div><h4>포커스집중</h4><p>대상 캐릭터 지정시 그 외 전원 친분 관계로 고정</p></div>
+      </div>
+    </section>
+
+    <section class="cmd-group" style="margin-bottom:60px;">
+      <span class="glabel">GROUP E · 안전</span>
+      <div class="grid-3">
+        <div class="m-card"><div class="m-tag">세이프콜 / !세이프콜</div><h4>세이프콜</h4><p>세이프워드 발동시 진행 즉시 중단·운영진 개입</p></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- ================= PAGE 3 : CAST ================= -->
+<main id="page-cast" class="page-view">
+  <div class="wrap">
+    <section class="character-hero">
+      <div class="eyebrow">CASTING ROSTER</div>
+      <h1>유리 안에서<br>당신을 기다리는 16명.</h1>
+      <p>본명은 관계 속에서만 불리고, 방송 위에서는 저마다의 닉네임으로만 존재합니다.</p>
+    </section>
+
+    <div class="eyebrow pink">OPERATION</div>
+    <div class="operator-grid">
+      <div class="operator-card">
+        <div class="role">MASTER · 운영총괄</div>
+        <h3>이안</h3>
+        <p class="desc">말보다 먼저 상대의 변화를 읽는 미러박스의 최종 결정자. 파트너 풀에는 포함되지 않습니다.</p>
+      </div>
+      <div class="operator-card">
+        <div class="role">MANAGER · 운영지원</div>
+        <h3>송지아</h3>
+        <p class="desc">이안의 실무 대리인. 세이프콜·긴급 상황·신규 호스트 응대에서 가장 먼저 나섭니다.</p>
+      </div>
+    </div>
+
+    <div class="eyebrow">16 PARTNERS</div>
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">전체</button>
+      <button class="filter-btn" data-filter="G">💜 G</button>
+      <button class="filter-btn" data-filter="C">💙 C</button>
+      <button class="filter-btn" data-filter="B">💚 B</button>
+    </div>
+
+    <div class="character-grid">
+      <div class="character-card" data-grade="B">
+        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+        <h3>정유건</h3><div class="real">방송명 카이</div>
+        <p class="flavor">장난스럽게 다가오다가 어느 순간 눈빛이 가라앉는다. 그 온도차를 즐긴다.</p>
+        <div class="tags"><span>온도차</span><span>몰아붙임</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>37.1</b></div>
+      </div>
+      <div class="character-card" data-grade="B">
+        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+        <h3>서이준</h3><div class="real">방송명 리안</div>
+        <p class="flavor">말보다 시선이 먼저 온다. 조용히, 그러나 놓아주지 않는다.</p>
+        <div class="tags"><span>조용한 리드</span><span>느린 몰입</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>37.1</b></div>
+      </div>
+      <div class="character-card" data-grade="B">
+        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+        <h3>한지혁</h3><div class="real">방송명 바닐라</div>
+        <p class="flavor">다정하게 이끌지만, 그 손끝은 한 번도 흔들리지 않는다.</p>
+        <div class="tags"><span>다정한 리드</span><span>섬세한 케어</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>36.1</b></div>
+      </div>
+      <div class="character-card" data-grade="B">
+        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+        <h3>남기준</h3><div class="real">방송명 로이</div>
+        <p class="flavor">소리와 숨결의 작은 변화까지, 한 번도 놓치지 않는다.</p>
+        <div class="tags"><span>정밀한 리드</span><span>집중력</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>36.1</b></div>
+      </div>
+      <div class="character-card" data-grade="B">
+        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+        <h3>윤태건</h3><div class="real">방송명 하루</div>
+        <p class="flavor">필요한 순간엔 망설이지 않는다. 그 전엔 늘 먼저 묻는다.</p>
+        <div class="tags"><span>주도적</span><span>신뢰 우선</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>35.1</b></div>
+      </div>
+      <div class="character-card" data-grade="B">
+        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+        <h3>Noah</h3><div class="real">방송명 알렉스</div>
+        <p class="flavor">급할 건 없다는 듯 여유롭게, 그러나 확실하게 좁혀온다.</p>
+        <div class="tags"><span>차분한 완급</span><span>장기전</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>36.1</b></div>
+      </div>
+      <div class="character-card" data-grade="B">
+        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+        <h3>강도현</h3><div class="real">방송명 미르</div>
+        <p class="flavor">명령하듯 리드하지만, 안전은 한 번도 대충 넘기지 않는다.</p>
+        <div class="tags"><span>명령형 리드</span><span>철저함</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>36.1</b></div>
+      </div>
+      <div class="character-card" data-grade="B">
+        <div class="top"><div class="gbadge"><span class="gem">💚</span><br>B</div></div>
+        <h3>박시온</h3><div class="real">방송명 다온</div>
+        <p class="flavor">여유롭게 던지듯 이끌다가도, 상대가 원하는 만큼 순순히 받아준다.</p>
+        <div class="tags"><span>여유</span><span>받아주는 포지션</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>36.1</b></div>
+      </div>
+      <div class="character-card" data-grade="C">
+        <div class="top"><div class="gbadge"><span class="gem">💙</span><br>C</div></div>
+        <h3>노하은</h3><div class="real">방송명 퀸비</div>
+        <p class="flavor">평소엔 거리를 두다가, 마음먹으면 단숨에 끌어당긴다.</p>
+        <div class="tags"><span>도도한 거리감</span><span>펨돔</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>16.1</b></div>
+      </div>
+      <div class="character-card" data-grade="G">
+        <div class="top"><div class="gbadge"><span class="gem">💜</span><br>G</div></div>
+        <h3>서예린</h3><div class="real">방송명 체리콕</div>
+        <p class="flavor">더티토크로 몰아가다, 반응을 보고서야 강도를 정한다.</p>
+        <div class="tags"><span>도발적</span><span>펨돔</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>7.1</b></div>
+      </div>
+      <div class="character-card" data-grade="G">
+        <div class="top"><div class="gbadge"><span class="gem">💜</span><br>G</div></div>
+        <h3>권이도</h3><div class="real">방송명 테오</div>
+        <p class="flavor">평소엔 다정하고 안정적이지만, 시작되면 완전히 달라진다.</p>
+        <div class="tags"><span>안정감</span><span>몰입형 반전</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>8.1</b></div>
+      </div>
+      <div class="character-card" data-grade="C">
+        <div class="top"><div class="gbadge"><span class="gem">💙</span><br>C</div></div>
+        <h3>유태양</h3><div class="real">방송명 모카</div>
+        <p class="flavor">약 올리듯 건드리다, 반응이 오면 신나서 몰아붙인다.</p>
+        <div class="tags"><span>장난기</span><span>반응 증폭</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>17.1</b></div>
+      </div>
+      <div class="character-card" data-grade="C">
+        <div class="top"><div class="gbadge"><span class="gem">💙</span><br>C</div></div>
+        <h3>권태오</h3><div class="real">방송명 결</div>
+        <p class="flavor">선을 넘기 직전, 능청스럽게 멈춘다. 그게 이 사람의 방식.</p>
+        <div class="tags"><span>능청스러움</span><span>비소유</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>15.1</b></div>
+      </div>
+      <div class="character-card" data-grade="G">
+        <div class="top"><div class="gbadge"><span class="gem">💜</span><br>G</div></div>
+        <h3>이준서</h3><div class="real">방송명 네비</div>
+        <p class="flavor">처음이라면 이 사람부터. 하나씩, 천천히 알려준다.</p>
+        <div class="tags"><span>안내형</span><span>완충</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>5.1</b></div>
+      </div>
+      <div class="character-card" data-grade="C">
+        <div class="top"><div class="gbadge"><span class="gem">💙</span><br>C</div></div>
+        <h3>강해승</h3><div class="real">방송명 모히또</div>
+        <p class="flavor">여유로운 대화의 속도로, 궁금증을 슬쩍 흘리며 이끈다.</p>
+        <div class="tags"><span>여유</span><span>궁금증 유발</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>15.1</b></div>
+      </div>
+      <div class="character-card" data-grade="G">
+        <div class="top"><div class="gbadge"><span class="gem">💜</span><br>G</div></div>
+        <h3>임하준</h3><div class="real">방송명 세이지</div>
+        <p class="flavor">역할을 던져주면 끝까지 지켜준다. 리드는 상대가 편할 때까지.</p>
+        <div class="tags"><span>서비스돔</span><span>롤플레잉 애호</span></div>
+        <div class="heat"><span>시작 활동온도</span><b>8.1</b></div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <div class="eyebrow" style="justify-content:center;">FIRST BROADCAST</div>
+      <h2>오늘, 어느 유리 앞에 서시겠습니까.</h2>
+      <p>같은 파트너도 등급과 거리에 따라 전혀 다른 얼굴을 보여줍니다.</p>
+      <button type="button" class="btn primary" style="margin-top:18px;" data-jump-page="guide">가이드로 돌아가기</button>
+    </div>
+  </div>
+</main>
+
+<!-- ================= PAGE 4 : PROFILE ================= -->
+<main id="page-profile" class="page-view">
+  <div class="wrap-narrow">
+    <section class="hero" style="padding:44px 0 8px;">
+      <div class="eyebrow">USER PROFILE</div>
+      <h1 style="font-size:clamp(26px,5vw,36px);">당신은 누구로<br>이 미러룸에 서겠습니까.</h1>
+      <p class="lead" style="font-size:16px;">활동명·취향·안전장치를 미리 정해두면 방송 예약이 훨씬 빨라집니다. 등급·활동온도·커미션은 첫 방송 전까지 존재하지 않는 값입니다.</p>
+    </section>
+
+    <div class="notice-strip" style="margin-bottom:16px;">
+      💡 <b>전부 채울 필요는 없습니다.</b> 비워둔 항목은 방송 진행 중 흐름에 맞춰 자연스럽게 설정됩니다. 맨 아래 "프로필 완성하기"로 지금까지 고른 내용을 한 번에 정리할 수 있어요.
+    </div>
+
+    <section class="block" style="padding-top:0;">
+
+      <div class="eyebrow pink">추천 프리셋</div>
+      <p class="hint" style="margin:-6px 0 12px;">눌러서 톤·자극수위·취향 몇 가지를 한번에 채우고, 아래에서 자유롭게 더하거나 바꾸세요. 다시 누르면 해제, 다른 프리셋을 누르면 이전 선택은 자동으로 바뀝니다.</p>
+      <div class="grid-3" style="margin-bottom:20px;">
+        <div class="theme-card clickable" data-preset-id="intro" onclick="applyProfilePreset('intro')">
+          <div class="t">입문형</div>
+          <div class="d">가볍게 시작하고 싶을 때 — 잔잔한 밀착감 위주(G~C)</div>
+        </div>
+        <div class="theme-card clickable" data-preset-id="deep" onclick="applyProfilePreset('deep')">
+          <div class="t">몰입형</div>
+          <div class="d">긴장감 있게 몰아붙여지고 싶을 때 — 지배·통제 중심(C~A)</div>
+        </div>
+        <div class="theme-card clickable" data-preset-id="scene" onclick="applyProfilePreset('scene')">
+          <div class="t">관찰 · 상황극형</div>
+          <div class="d">분위기와 상황 중심으로 천천히 — 노출·밀착 위주(G~B)</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="m-tag">필수</span>
+        <span class="eyebrow" style="margin-top:2px;">기본 정보</span>
+        <div class="field">
+          <label>닉네임</label>
+          <input type="text" id="profileNickname" placeholder="예: 컬윈">
+        </div>
+        <div class="field">
+          <label>한줄 소개</label>
+          <textarea id="profileIntro" placeholder="채널에 표시될 소개 문구"></textarea>
+        </div>
+      </div>
+
+      <p class="hint" style="padding:0 4px 14px;">등급·활동온도·커미션은 시작 시점엔 존재하지 않는 값(전부 첫 방송부터 0/미부여로 생성) —
+      프로필 탭에는 표시하지 않고, 실제 발생 후 [화폐_커미션]/[활동온도] 고정 UI 스탯 쪽에서만 노출</p>
+
+      <div class="card">
+        <span class="m-tag">선택</span>
+        <span class="eyebrow" style="margin-top:2px;">플레이 결</span>
+        <h3>분위기 톤(강도와 별개)</h3>
+        <p class="desc">강도(소프트~하드)는 아래 "자극 수위"가 담당 — 여기는 같은 강도 안에서도
+        갈리는 진행 톤 선택(택1)</p>
+        <div class="chipgroup" data-group="single" data-name="base-style">
+          <div class="tchip">생활형 · 잔잔한 밀착</div>
+          <div class="tchip">플러팅 · 스킨십 위주</div>
+          <div class="tchip">텐션 · 딥 위주</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="m-tag">선택</span>
+        <span class="eyebrow" style="margin-top:2px;">자극 수위</span>
+        <h3>소프트 → 하드 5단계</h3>
+        <p class="desc">등급 G~S 자체가 소프트~하드 5단계 척도 — 편한 시작 등급과 허용 상한 등급 선택
+        (허용상한 S 선택시 아래 체크리스트의 "스파이시" 항목이 열림)</p>
+        <div class="subgroup">
+          <div class="sublabel">선호 시작 · SOFT ─────────── HARD</div>
+          <div class="chipgroup tiergroup" data-group="single" data-name="tier-start">
+            <div class="tchip">G</div><div class="tchip">C</div><div class="tchip">B</div>
+            <div class="tchip">A</div><div class="tchip">S</div>
+          </div>
+        </div>
+        <div class="subgroup">
+          <div class="sublabel">허용 상한 · SOFT ─────────── HARD</div>
+          <div class="chipgroup tiergroup" data-group="single" data-name="tier-max">
+            <div class="tchip">G</div><div class="tchip">C</div><div class="tchip">B</div>
+            <div class="tchip">A</div><div class="tchip">S</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="m-tag">선택</span>
+        <span class="eyebrow" style="margin-top:2px;">취향 체크리스트</span>
+        <h3>항목별 세부 취향</h3>
+        <p class="desc">미러룸 소품·플레이 키워드 기본 풀 기준(예시 풀, 하단에서 자유 추가 가능)
+        — 카테고리를 펼쳐 항목별로 평가, 항목명 옆 <span class="mono">?</span> 버튼을 누르면 뜻을 바로 볼 수 있어요</p>
+        <div class="legend">
+          <span><i>X</i> 비선호</span>
+          <span><i>?</i> 궁금함</span>
+          <span><i>O</i> 선호</span>
+          <span><i>♥</i> 최애</span>
+        </div>
+        <div class="reco-box">
+          <p>💡 <b>전부 다 체크하지 않아도 됩니다.</b> 체크한 항목이 많아질수록 프롬프트에 들어가는 분량(토큰)이 늘어나요 — <b>선호(O)·최애(♥)</b> 위주로만 표시하는 걸 추천해요. 비선호(X)·궁금함(?)은 특별히 꼭 남기고 싶은 항목이 아니라면 굳이 안 채워도 괜찮습니다.</p>
+          <p>선호 항목이 너무 많아졌다면, 지금 당장 즐기고 싶은 플레이 위주로 <b>5~10개 정도만</b> 추려서 저장해두고, 그때그때 기분에 따라 바꿔가며 이용하시는 것도 추천드려요.</p>
+        </div>
+
+        <details class="category" open>
+          <summary>구속 · 억제 <span class="n">10항목</span></summary>
+          <div class="catbody" data-cat="restraint">
+            <div class="kink-row"><span class="label">로프 · 행잉</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">구속기구</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">구속벨트</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">가죽커프</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">재갈</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">아이마스크(감각차단)</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">정조대</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">수갑</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">목줄</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">테이프(감각차단·구속용)</span><div class="rate"></div></div>
+          </div>
+        </details>
+
+        <details class="category">
+          <summary>통증 · 감각자극 <span class="n">8항목</span></summary>
+          <div class="catbody" data-cat="sensation">
+            <div class="kink-row"><span class="label">깃털</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">아이스큐브</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">패들</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">캣오나인테일</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">채찍</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">오일 · 핫젤</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">초커</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">혀피어싱 자극</span><div class="rate"></div></div>
+          </div>
+        </details>
+
+        <details class="category">
+          <summary>자극 기구 <span class="n">7항목</span></summary>
+          <div class="catbody" data-cat="toys">
+            <div class="kink-row"><span class="label">바이브</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">로터</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">관장액</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">딜도</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">아네로스</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">에널비즈</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">콕링</span><div class="rate"></div></div>
+          </div>
+        </details>
+
+        <details class="category">
+          <summary>지배 · 통제 플레이 <span class="n">6항목</span></summary>
+          <div class="catbody" data-cat="control">
+            <div class="kink-row"><span class="label">오르가즘 컨트롤(사정금지)</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">애태우기(에지플레이)</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">브레스컨트롤 압박</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">딥스로트 강제유도</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">거친 명령조</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">마초 피스톤 몰아붙이기</span><div class="rate"></div></div>
+          </div>
+        </details>
+
+        <details class="category">
+          <summary>야외 · 상황 노출 <span class="n">4항목</span></summary>
+          <div class="catbody" data-cat="outdoor">
+            <div class="kink-row"><span class="label">야외노출플</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">방치플</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">은밀노출플</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">스릴노출플</span><div class="rate"></div></div>
+          </div>
+        </details>
+
+        <details class="category">
+          <summary>프라이빗 밀착 · 마사지 <span class="n">4항목</span></summary>
+          <div class="catbody" data-cat="private">
+            <div class="kink-row"><span class="label">밀착플</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">오일 마사지플</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">전라혼욕플</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">관찰입욕플</span><div class="rate"></div></div>
+          </div>
+        </details>
+
+        <details class="category spicy" id="cat-spicy">
+          <summary>스파이시 · 하드플레이 <span class="n">12항목 · S 옵트인</span></summary>
+          <div class="catbody" data-cat="spicy">
+            <p class="lockmsg" id="spicyLockMsg">허용 상한을 S로 선택해야 활성화됩니다</p>
+            <div class="kink-row"><span class="label">피스트퍽</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">카테터</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">사운딩(요도)</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">니들플레이</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">니플토쳐(클램프)</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">CBT(고환자극)</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">왁스플레이</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">일렉트로플레이(전기자극)</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">브랜딩(낙인)</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">블러드플레이(경미한 절개)</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">후크 서스펜션</span><div class="rate"></div></div>
+            <div class="kink-row"><span class="label">극단 브레스컨트롤(질식 직전)</span><div class="rate"></div></div>
+          </div>
+        </details>
+
+        <p class="hint">항목 확장(600자 상세 설명 등)은 별도 키워드북 파일 몫 — 여기는 목록·평가 UI 확정용</p>
+
+        <div class="field custom-partner">
+          <label>🎭 롤플레잉(자유 기재)</label>
+          <input type="text" id="customRoleplay" placeholder="예: 도그플, 잘못에 대한 훈육, 책상 아래 오랄(회사), 바람피는 애인 등">
+          <p class="hint">세부 시나리오 목록은 따로 없어요 — "롤플레잉"이라고만 적어도 진행 중 알아서 반영돼요. 원하는 상황이 있으면 위 예시처럼 자유롭게 적어주세요.</p>
+        </div>
+
+        <div class="field custom-partner">
+          <label>✨ 직접 입력(목록에 없는 취향 자유 추가)</label>
+          <input type="text" id="customTaste" placeholder="예: 이런 소품/플레이도 좋아해요">
+          <p class="hint">위 51항목은 예시 풀이에요 — 카테고리 결·등급에 맞으면 새로운 소품·플레이를 자유롭게 적어서 저장할 수 있어요</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="m-tag">필수</span>
+        <span class="eyebrow" style="margin-top:2px;">안전장치</span>
+        <h3>하드리밋 &amp; 세이프워드</h3>
+        <p class="desc">방송룸 예약 1턴 설문에 그대로 연동되는 기본값(예약시 수정 가능)</p>
+        <div class="field safe">
+          <label>🚫 절대 금지사항(하드리밋)</label>
+          <input type="text" id="tasteHardlimit" placeholder="예: 얼굴 노출 불가, 특정 소품 금지 등">
+        </div>
+        <div class="field safe">
+          <label>🔑 세이프워드</label>
+          <input type="text" id="tasteSafeword" placeholder="예: 파인애플">
+        </div>
+        <p class="hint">둘 다 미기재시 예약 진행 불가([안전장치] 규칙과 동일하게 프로필에서도 필수 처리)</p>
+      </div>
+
+      <div class="card">
+        <span class="eyebrow pink">설정 완성</span>
+        <h3>프로필 완성하기</h3>
+        <p class="desc">위에서 고른 내용을 하나의 텍스트로 정리합니다. 복사해서 채팅창에 붙여넣으면 바로 적용됩니다.</p>
+        <button class="copybtn" id="profileGenBtn">📝 프로필 완성하기</button>
+        <pre class="booking-summary" id="profileOutput" style="display:none; margin-top:12px;"></pre>
+        <button class="copybtn" id="profileCopyBtn" style="display:none; margin-top:8px;">📋 복사하기</button>
+      </div>
+
+      <div class="card">
+        <span class="eyebrow pink">유저노트 보완지침</span>
+        <h3>유저노트 생성기</h3>
+        <p class="desc">필요한 항목만 켜서(ON) 조합하면, 그대로 유저노트에 붙여넣을 수 있는 보완 프롬프트가 만들어집니다. 끈 항목(OFF)은 결과물에서 빠집니다.</p>
+
+        <div class="subgroup">
+          <div class="sublabel">진행 방식</div>
+          <div class="chipgroup" data-group="multi" data-name="note-flags">
+            <div class="tchip" data-note="uifix">UI고정</div>
+            <div class="tchip" data-note="autoflow">관전자율진행</div>
+            <div class="tchip" data-note="norepeat">반복표현억제</div>
+          </div>
+        </div>
+
+        <div class="subgroup">
+          <div class="sublabel">서술 속도감(택1)</div>
+          <div class="chipgroup" data-group="single" data-name="note-pace">
+            <div class="tchip" data-note="speedup">가속 · 빠르게</div>
+            <div class="tchip" data-note="detail">몰입 · 디테일하게</div>
+          </div>
+        </div>
+
+        <p class="hint" style="margin-top:12px;">UI고정=상태창(STATUS) 매턴 출력 강제 / 관전자율진행=관전중 확인대기없이 자동전개 / 반복표현억제=같은 표현·전개 반복 최소화 / 가속=비트 빠르게 진행 / 몰입=묘사비중↑·천천히</p>
+
+        <button class="copybtn" id="noteGenBtn" style="margin-top:10px;">📝 유저노트 프롬프트 뽑기</button>
+        <pre class="booking-summary" id="noteOutput" style="display:none; margin-top:12px;"></pre>
+        <button class="copybtn" id="noteCopyBtn" style="display:none; margin-top:8px;">📋 복사하기</button>
+      </div>
+
+      <div class="savebar">
+        <button class="savebtn" id="saveBtn">프로필 저장</button>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<!-- ================= PAGE 5 : BOOKING ================= -->
+<main id="page-booking" class="page-view">
+  <div class="wrap-narrow">
+    <section class="hero" style="padding:44px 0 8px;">
+      <div class="eyebrow dim">BROADCAST BOOKING</div>
+      <h1 style="font-size:clamp(26px,5vw,36px);">STEP 1부터 6까지,<br>지금 이 방송을 확정합니다.</h1>
+      <p class="lead" style="font-size:16px;">등급 → 파트너 → 목표 → 장소 → 컨셉 → 안전장치. 마지막 요약을 복사해 채팅창에 붙여넣으면 접수됩니다.</p>
+    </section>
+    <section class="block" style="padding-top:22px;">
+
+      <div class="eyebrow pink">추천 프리셋</div>
+      <p class="hint" style="margin:-6px 0 12px;">눌러서 플레이 컨셉 키워드를 바로 채우고, 그 다음부터는 자유롭게 이어가세요(파트너·등급은 아래에서 별도 선택). 다시 누르면 해제됩니다.</p>
+      <div class="grid-3" style="margin-bottom:20px;">
+        <div class="preset" data-keywords="거친 명령조,마초 피스톤 몰아붙이기">
+          <div class="t">터프한 리드</div>
+          <div class="k">거친 명령조 · 마초 피스톤 몰아붙이기</div>
+        </div>
+        <div class="preset" data-keywords="오일 마사지플,밀착플">
+          <div class="t">다정한 케어</div>
+          <div class="k">오일 마사지플 · 밀착플</div>
+        </div>
+        <div class="preset" data-keywords="애태우기(에지플레이),스릴노출플">
+          <div class="t">장난 · 텐션</div>
+          <div class="k">애태우기(에지플레이) · 스릴노출플</div>
+        </div>
+      </div>
+
+      <div class="card mirror-card">
+        <span class="eyebrow">방송룸 사양</span>
+        <h3>매직미러 창</h3>
+        <p class="desc">전 채널 공통 기본 구조 — 룸 안에서는 바깥이 안 보이고, 바깥(시청자)에서는 룸 안이 보이는 편도 매직미러가 기본값. 호스트가 룸 내부 버튼으로 언제든 양방향 투명창으로 전환 가능(강제 전환 없음).</p>
+        <div class="mirror-demo">
+          <div class="mirror-state" id="mirrorLabel">🪞 매직미러<small id="mirrorDesc">바깥이 안 보여요 — 몰입이 필요한 장면에 유지</small></div>
+          <div class="mirror-switch" id="mirrorSwitch"><div class="knob"></div></div>
+        </div>
+        <p class="hint">양방향 전환시 — 노출·관음 자극이 필요한 장면에서 시청자에게 그대로 보이도록 여는 용도(예: 노출플 진행시). 실제 방송 중 언제든 다시 매직미러로 되돌릴 수 있음.</p>
+      </div>
+
+      <div class="card">
+        <span class="step-label">STEP 1</span>
+        <h3>미러룸 등급 선택</h3>
+        <p class="desc">원하는 미러룸 등급을 자유롭게 선택하세요. 아래 미리보기는 클릭한 등급 그대로 반영됩니다.</p>
+        <p class="hint">실제 서비스에서는 보유 등급보다 높은 등급을 골라도 보유 최고 등급에 맞춰 자동 보정됩니다(이 페이지는 로그인 연동이 없어 보유 등급을 알 수 없으므로 미리보기엔 적용되지 않음)</p>
+        <div class="gradegrid" data-group="single" data-name="booking-grade">
+          <div class="gradecard active" data-grade="0" data-name="G" data-gem="자수정" data-fee="10" data-mmin="10" data-mmax="30" data-viewer="30" data-donate="50">
+            <span class="gname">G</span><span class="ggem">💜 자수정</span><span class="gsub">부킹비 10C<br>미션 10~30C</span>
+          </div>
+          <div class="gradecard" data-grade="1" data-name="C" data-gem="사파이어" data-fee="20" data-mmin="30" data-mmax="80" data-viewer="60" data-donate="150">
+            <span class="gname">C</span><span class="ggem">💙 사파이어</span><span class="gsub">부킹비 20C<br>미션 30~80C</span>
+          </div>
+          <div class="gradecard" data-grade="2" data-name="B" data-gem="에메랄드" data-fee="50" data-mmin="80" data-mmax="200" data-viewer="120" data-donate="400">
+            <span class="gname">B</span><span class="ggem">💚 에메랄드</span><span class="gsub">부킹비 50C<br>미션 80~200C</span>
+          </div>
+          <div class="gradecard" data-grade="3" data-name="A" data-gem="루비" data-fee="120" data-mmin="200" data-mmax="500" data-viewer="250" data-donate="1000">
+            <span class="gname">A</span><span class="ggem">❤️ 루비</span><span class="gsub">부킹비 120C<br>미션 200~500C</span>
+          </div>
+          <div class="gradecard" data-grade="4" data-name="S" data-gem="다이아몬드" data-fee="300" data-mmin="500" data-mmax="1500" data-viewer="500" data-donate="2500">
+            <span class="gname">S</span><span class="ggem">💎 다이아몬드</span><span class="gsub">부킹비 300C<br>미션 500~1,500C</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="step-label">STEP 2</span>
+        <h3>파트너 선택</h3>
+        <p class="desc">랜덤배정 또는 특정 파트너 직접 지명 — 파트너 등급은 고정값이 아니라 활동온도에 따라 계속 바뀌므로, 실제 진행 시 [자동보정_등급상한]으로 그때그때 채널 등급에 맞게 자동 조정됩니다</p>
+        <div class="chipgroup" data-group="single" data-name="booking-partner">
+          <div class="tchip partner-chip active" data-partner="랜덤배정">랜덤배정</div>
+          <div class="tchip partner-chip" data-partner="이준서">이준서</div>
+          <div class="tchip partner-chip" data-partner="권이도">권이도</div>
+          <div class="tchip partner-chip" data-partner="임하준">임하준</div>
+          <div class="tchip partner-chip" data-partner="강해승">강해승</div>
+          <div class="tchip partner-chip" data-partner="유태양">유태양</div>
+          <div class="tchip partner-chip" data-partner="권태오">권태오</div>
+          <div class="tchip partner-chip" data-partner="윤태건">윤태건</div>
+          <div class="tchip partner-chip" data-partner="서예린">서예린</div>
+          <div class="tchip partner-chip" data-partner="정유건">정유건</div>
+          <div class="tchip partner-chip" data-partner="서이준">서이준</div>
+          <div class="tchip partner-chip" data-partner="노하은">노하은</div>
+          <div class="tchip partner-chip" data-partner="한지혁">한지혁</div>
+          <div class="tchip partner-chip" data-partner="강도현">강도현</div>
+          <div class="tchip partner-chip" data-partner="박시온">박시온</div>
+          <div class="tchip partner-chip" data-partner="남기준">남기준</div>
+          <div class="tchip partner-chip" data-partner="Noah">Noah</div>
+        </div>
+
+        <div class="field custom-partner">
+          <label>✨ 직접 입력(원하는 캐릭터 자유 설정)</label>
+          <p class="example-box">작성 예시 — 이름 · 외형 · 성격/말투 · 관계 설정<br>예: 이하람 · 20대 초반, 은발에 붉은 눈 · 차갑지만 다정한 반전 매력, 존댓말 쓰다가 흔들리면 반말 · 첫 방송 이후 유독 챙겨주는 단골 설정</p>
+          <input type="text" id="customPartner" placeholder="여기에 입력">
+          <p class="hint">직접 입력시 위 목록 선택은 무시됩니다 · 신규 캐릭터는 진행 전 설정 확인 절차를 거칩니다</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="step-label">STEP 3</span>
+        <h3>방송 목표 — 타이틀</h3>
+        <p class="desc">목표 달성 전까지 방송 지속(달성=종료조건) · 정량형 2종 + 시나리오완주형 1종 중 택1</p>
+        <div class="chipgroup" data-group="single" data-name="booking-goal">
+          <div class="tchip active" data-goal="viewer">시청자형</div>
+          <div class="tchip" data-goal="donate">후원누적형</div>
+          <div class="tchip" data-goal="scenario">시나리오완주형</div>
+        </div>
+        <div class="goal-detail" id="goalDetail">선택 등급 기준 시청자 <b id="goalViewerNum">30</b>명 도달까지</div>
+        <div class="field" id="scenarioNameField" hidden style="margin-top:10px;">
+          <label>시나리오 컨셉명(타이틀로 표시)</label>
+          <input type="text" id="scenarioName" placeholder="예: 공원 산책 D-DAY">
+        </div>
+        <div class="field" id="scenarioThemeField" hidden style="margin-top:10px;">
+          <label>연출 테마(선택 — 안 골라도 자유설계로 진행)</label>
+          <div class="chipgroup" data-group="single" data-name="scenario-theme">
+            <div class="tchip theme-chip active" data-theme="">자유설계</div>
+            <div class="tchip theme-chip" data-theme="교류형">교류형</div>
+            <div class="tchip theme-chip" data-theme="체험형">체험형</div>
+            <div class="tchip theme-chip" data-theme="관찰형">관찰형</div>
+            <div class="tchip theme-chip" data-theme="경쟁형">경쟁형</div>
+            <div class="tchip theme-chip" data-theme="교육형">교육형</div>
+            <div class="tchip theme-chip" data-theme="매칭형">매칭형</div>
+            <div class="tchip theme-chip" data-theme="축제형">축제형</div>
+            <div class="tchip theme-chip" data-theme="커뮤니티형">커뮤니티형</div>
+            <div class="tchip theme-chip" data-theme="커플형">커플형</div>
+            <div class="tchip theme-chip" data-theme="롤플레잉형">롤플레잉형</div>
+            <div class="tchip theme-chip" data-theme="훈육형">훈육형</div>
+            <div class="tchip theme-chip" data-theme="게임형">게임형</div>
+          </div>
+          <p class="hint">테마는 순수 연출 라벨(신규 화폐·수치 없음) — 키워드북 [미러룸_03] 참고, 자유설계로 직접 만들어도 무방</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="step-label">STEP 4</span>
+        <h3>장소</h3>
+        <p class="desc">실내/야외 선택 후 구체 장소를 지정하거나, 무작위 배정으로 맡길 수 있음 — 목록은 STEP1 등급에 맞춰 자동으로 바뀜</p>
+        <div class="place-toggle chipgroup" data-group="single" data-name="place-io">
+          <div class="tchip active" data-io="all">전체</div>
+          <div class="tchip" data-io="실내">실내</div>
+          <div class="tchip" data-io="야외">야외</div>
+        </div>
+        <div class="chipgroup placegrid" data-group="single" data-name="booking-place">
+          <div class="tchip place-chip active" data-place="무작위 배정" data-pgrade="-1" data-io="실내">무작위 배정</div>
+          <div class="tchip place-chip" data-place="강의실" data-pgrade="0" data-io="실내">강의실</div>
+          <div class="tchip place-chip" data-place="공원 벤치" data-pgrade="0" data-io="야외">공원 벤치</div>
+          <div class="tchip place-chip" data-place="사물함" data-pgrade="0" data-io="실내">사물함</div>
+          <div class="tchip place-chip" data-place="공중화장실" data-pgrade="0" data-io="실내">공중화장실</div>
+          <div class="tchip place-chip" data-place="창고" data-pgrade="0" data-io="실내">창고</div>
+          <div class="tchip place-chip" data-place="버스정류장" data-pgrade="0" data-io="야외">버스정류장</div>
+          <div class="tchip place-chip" data-place="비상계단" data-pgrade="0" data-io="실내">비상계단</div>
+          <div class="tchip place-chip" data-place="한강공원" data-pgrade="0" data-io="야외">한강공원</div>
+          <div class="tchip place-chip" data-place="주차장" data-pgrade="1" data-io="야외">주차장</div>
+          <div class="tchip place-chip" data-place="차 안" data-pgrade="1" data-io="실내">차 안</div>
+          <div class="tchip place-chip" data-place="벽 얇은 원룸" data-pgrade="1" data-io="실내">벽 얇은 원룸</div>
+          <div class="tchip place-chip" data-place="클럽화장실" data-pgrade="1" data-io="실내">클럽화장실</div>
+          <div class="tchip place-chip" data-place="모텔(저가형)" data-pgrade="1" data-io="실내">모텔(저가형)</div>
+          <div class="tchip place-chip" data-place="엘리베이터" data-pgrade="1" data-io="실내">엘리베이터</div>
+          <div class="tchip place-chip" data-place="침실" data-pgrade="2" data-io="실내">침실</div>
+          <div class="tchip place-chip" data-place="오피스텔" data-pgrade="2" data-io="실내">오피스텔</div>
+          <div class="tchip place-chip" data-place="게스트하우스" data-pgrade="2" data-io="실내">게스트하우스</div>
+          <div class="tchip place-chip" data-place="혼성 공용목욕탕" data-pgrade="2" data-io="실내">혼성 공용목욕탕</div>
+          <div class="tchip place-chip" data-place="료칸" data-pgrade="2" data-io="실내">료칸</div>
+          <div class="tchip place-chip" data-place="실내정원" data-pgrade="2" data-io="실내">실내정원</div>
+          <div class="tchip place-chip" data-place="테마룸" data-pgrade="3" data-io="실내">테마룸</div>
+          <div class="tchip place-chip" data-place="공중전화부스" data-pgrade="3" data-io="야외">공중전화부스</div>
+          <div class="tchip place-chip" data-place="프라이빗수영장" data-pgrade="3" data-io="야외">프라이빗수영장</div>
+          <div class="tchip place-chip" data-place="옥상테라스" data-pgrade="3" data-io="야외">옥상테라스</div>
+          <div class="tchip place-chip" data-place="야경 스위트룸" data-pgrade="4" data-io="실내">야경 스위트룸</div>
+          <div class="tchip place-chip" data-place="펜트하우스" data-pgrade="4" data-io="실내">펜트하우스</div>
+          <div class="tchip place-chip" data-place="풀빌라" data-pgrade="4" data-io="야외">풀빌라</div>
+          <div class="tchip place-chip" data-place="프라이빗 비치" data-pgrade="4" data-io="야외">프라이빗 비치</div>
+          <div class="tchip place-chip" data-place="리조트 수영장&풀바" data-pgrade="4" data-io="야외">리조트 수영장&풀바</div>
+        </div>
+        <div class="field" style="margin-top:10px;">
+          <label>✨ 직접 입력(원하는 장소 자유 설정)</label>
+          <input type="text" id="customPlace" placeholder="위 목록은 예시일 뿐 — 등급 분위기에 맞으면 자유롭게 적어주세요">
+          <p class="hint">직접 입력시 위 목록 선택은 무시됩니다</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="step-label">STEP 5</span>
+        <h3>플레이 컨셉 키워드</h3>
+        <p class="desc">추천 컨셉 표에서 선택(다중 선택 가능) 또는 직접 입력 — 등급 무관 자유 선택, 실제 방송에서는 채널등급에 맞게 자동 조정됩니다(스파이시·하드플레이 계열은 S등급 + 개별 동의 필요)</p>
+
+        <p class="desc" style="margin-bottom:8px;">추천 컨셉 — 눌러서 바로 채우기</p>
+        <div class="presetlist" id="presetList">
+          <div class="preset" data-keywords="밀착플">
+            <div class="t">설레는 첫만남</div>
+            <div class="k">밀착플</div>
+          </div>
+          <div class="preset" data-keywords="야외노출플,스릴노출플">
+            <div class="t">스릴 야외 데이트</div>
+            <div class="k">야외노출플 · 스릴노출플</div>
+          </div>
+          <div class="preset" data-keywords="전라혼욕플,오일 마사지플">
+            <div class="t">온천 밀회</div>
+            <div class="k">전라혼욕플 · 오일 마사지플</div>
+          </div>
+          <div class="preset" data-keywords="구속기구,로프 · 행잉">
+            <div class="t">가벼운 구속 입문</div>
+            <div class="k">구속기구 · 로프 · 행잉</div>
+          </div>
+          <div class="preset" data-keywords="거친 명령조,마초 피스톤 몰아붙이기">
+            <div class="t">터프한 리드</div>
+            <div class="k">거친 명령조 · 마초 피스톤 몰아붙이기</div>
+          </div>
+          <div class="preset" data-keywords="오르가즘 컨트롤(사정금지)">
+            <div class="t">오르가즘 컨트롤</div>
+            <div class="k">오르가즘 컨트롤(사정금지)</div>
+          </div>
+        </div>
+
+        <p class="desc" style="margin-top:18px; margin-bottom:8px;">기본 키워드 풀 — 취향표와 동일한 7개 카테고리(예시 풀, STEP5 하단 직접 입력으로 자유 추가 가능)</p>
+
+        <div class="concept-cat">
+          <span class="catlabel">구속 · 억제 계열</span>
+          <div class="chipgroup" data-group="multi" data-name="concept">
+            <div class="tchip concept-chip" data-cmin="1">로프 · 행잉</div>
+            <div class="tchip concept-chip" data-cmin="1">구속기구</div>
+            <div class="tchip concept-chip" data-cmin="1">구속벨트</div>
+            <div class="tchip concept-chip" data-cmin="1">가죽커프</div>
+            <div class="tchip concept-chip" data-cmin="1">재갈</div>
+            <div class="tchip concept-chip" data-cmin="1">아이마스크(감각차단)</div>
+            <div class="tchip concept-chip" data-cmin="1">정조대</div>
+            <div class="tchip concept-chip" data-cmin="1">수갑</div>
+            <div class="tchip concept-chip" data-cmin="1">목줄</div>
+            <div class="tchip concept-chip" data-cmin="1">테이프(감각차단·구속용)</div>
+          </div>
+        </div>
+        <div class="concept-cat">
+          <span class="catlabel">통증 · 감각자극 계열</span>
+          <div class="chipgroup" data-group="multi" data-name="concept">
+            <div class="tchip concept-chip" data-cmin="0">깃털</div>
+            <div class="tchip concept-chip" data-cmin="0">아이스큐브</div>
+            <div class="tchip concept-chip" data-cmin="2">패들</div>
+            <div class="tchip concept-chip" data-cmin="2">캣오나인테일</div>
+            <div class="tchip concept-chip" data-cmin="2">채찍</div>
+            <div class="tchip concept-chip" data-cmin="0">오일 · 핫젤</div>
+            <div class="tchip concept-chip" data-cmin="0">초커</div>
+            <div class="tchip concept-chip" data-cmin="1">혀피어싱 자극</div>
+          </div>
+        </div>
+        <div class="concept-cat">
+          <span class="catlabel">자극 기구 계열</span>
+          <div class="chipgroup" data-group="multi" data-name="concept">
+            <div class="tchip concept-chip" data-cmin="0">바이브</div>
+            <div class="tchip concept-chip" data-cmin="0">로터</div>
+            <div class="tchip concept-chip" data-cmin="0">관장액</div>
+            <div class="tchip concept-chip" data-cmin="0">딜도</div>
+            <div class="tchip concept-chip" data-cmin="1">아네로스</div>
+            <div class="tchip concept-chip" data-cmin="1">에널비즈</div>
+            <div class="tchip concept-chip" data-cmin="1">콕링</div>
+          </div>
+        </div>
+        <div class="concept-cat">
+          <span class="catlabel">지배 · 통제 플레이 계열</span>
+          <div class="chipgroup" data-group="multi" data-name="concept">
+            <div class="tchip concept-chip" data-cmin="3">오르가즘 컨트롤(사정금지)</div>
+            <div class="tchip concept-chip" data-cmin="2">애태우기(에지플레이)</div>
+            <div class="tchip concept-chip" data-cmin="2">브레스컨트롤 압박</div>
+            <div class="tchip concept-chip" data-cmin="2">딥스로트 강제유도</div>
+            <div class="tchip concept-chip" data-cmin="1">거친 명령조</div>
+            <div class="tchip concept-chip" data-cmin="2">마초 피스톤 몰아붙이기</div>
+          </div>
+        </div>
+        <div class="concept-cat">
+          <span class="catlabel">야외 · 상황 노출 계열</span>
+          <div class="chipgroup" data-group="multi" data-name="concept">
+            <div class="tchip concept-chip" data-cmin="0">야외노출플</div>
+            <div class="tchip concept-chip" data-cmin="0">방치플</div>
+            <div class="tchip concept-chip" data-cmin="1">은밀노출플</div>
+            <div class="tchip concept-chip" data-cmin="1">스릴노출플</div>
+          </div>
+        </div>
+        <div class="concept-cat">
+          <span class="catlabel">프라이빗 밀착 · 마사지 계열</span>
+          <div class="chipgroup" data-group="multi" data-name="concept">
+            <div class="tchip concept-chip" data-cmin="0">밀착플</div>
+            <div class="tchip concept-chip" data-cmin="0">오일 마사지플</div>
+            <div class="tchip concept-chip" data-cmin="2">전라혼욕플</div>
+            <div class="tchip concept-chip" data-cmin="2">관찰입욕플</div>
+          </div>
+        </div>
+        <div class="concept-cat">
+          <span class="catlabel">스파이시 · 하드플레이 계열 (S 옵트인)</span>
+          <div class="chipgroup" data-group="multi" data-name="concept">
+            <div class="tchip concept-chip" data-cmin="4">피스트퍽</div>
+            <div class="tchip concept-chip" data-cmin="4">카테터</div>
+            <div class="tchip concept-chip" data-cmin="4">사운딩(요도)</div>
+            <div class="tchip concept-chip" data-cmin="4">니들플레이</div>
+            <div class="tchip concept-chip" data-cmin="4">니플토쳐(클램프)</div>
+            <div class="tchip concept-chip" data-cmin="4">CBT(고환자극)</div>
+            <div class="tchip concept-chip" data-cmin="4">왁스플레이</div>
+            <div class="tchip concept-chip" data-cmin="4">일렉트로플레이(전기자극)</div>
+            <div class="tchip concept-chip" data-cmin="4">브랜딩(낙인)</div>
+            <div class="tchip concept-chip" data-cmin="4">블러드플레이(경미한 절개)</div>
+            <div class="tchip concept-chip" data-cmin="4">후크 서스펜션</div>
+            <div class="tchip concept-chip" data-cmin="4">극단 브레스컨트롤(질식 직전)</div>
+          </div>
+          <p class="hint">취향표에서 개별 항목 동의해둔 경우에만 실제 진행 — 여기서 선택은 "희망"일 뿐, 옵트인 동의가 최종 우선</p>
+        </div>
+
+        <div class="field" style="margin-top:4px;">
+          <label>직접 입력(자유 설정)</label>
+          <input type="text" id="conceptFree" placeholder="원하는 컨셉을 직접 적어주세요">
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="step-label">STEP 6 · 필수</span>
+        <h3>안전장치</h3>
+        <p class="desc">취향표에 입력해둔 값이 있다면 그대로 가져와 보여줍니다(여기서 수정하면 이번 예약에만 적용) — 미기재시 예약 진행 불가</p>
+        <div class="field safe">
+          <label>🚫 절대 금지사항(하드리밋)</label>
+          <input type="text" id="bookingHardlimit" placeholder="예: 얼굴 노출 불가, 특정 소품 금지 등">
+        </div>
+        <div class="field safe">
+          <label>🔑 세이프워드</label>
+          <input type="text" id="bookingSafeword" placeholder="예: 파인애플">
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="eyebrow">확정 요약</span>
+        <h3>예약 확인</h3>
+        <pre class="booking-summary" id="bookingSummary"></pre>
+        <button class="copybtn" id="bookBtn">📋 예약 접수하러가기</button>
+        <p class="copy-guide">위 내용을 복사해 채팅창에 그대로 붙여넣어 제출하세요.</p>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<script>
+(function(){
+  var pageTabs = document.querySelectorAll('.page-tab');
+  var pageViews = document.querySelectorAll('.page-view');
+
+  function openPage(name){
+    pageTabs.forEach(function(t){ t.classList.toggle('active', t.dataset.page === name); });
+    pageViews.forEach(function(v){ v.classList.toggle('active', v.id === 'page-' + name); });
+    window.scrollTo({top:0, behavior:'auto'});
+  }
+  pageTabs.forEach(function(t){ t.addEventListener('click', function(){ openPage(t.dataset.page); }); });
+
+  document.querySelectorAll('[data-jump-page]').forEach(function(b){
+    b.addEventListener('click', function(){ openPage(b.dataset.jumpPage); });
+  });
+
+  document.querySelectorAll('[data-jump]').forEach(function(el){
+    el.addEventListener('click', function(){
+      var target = document.getElementById(el.dataset.jump);
+      if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+
+  // 다크/화이트 모드 토글
+  var themeBtn = document.getElementById('themeToggle');
+  var root = document.documentElement;
+  function applyTheme(t){
+    if(t === 'light'){ root.setAttribute('data-theme','light'); if(themeBtn){ themeBtn.textContent = '☀️'; } }
+    else{ root.removeAttribute('data-theme'); if(themeBtn){ themeBtn.textContent = '🌙'; } }
+  }
+  var savedTheme = 'dark';
+  try{ savedTheme = localStorage.getItem('mirrorRoomTheme') || 'dark'; }catch(e){}
+  applyTheme(savedTheme);
+  if(themeBtn){
+    themeBtn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      try{ localStorage.setItem('mirrorRoomTheme', next); }catch(e){}
+    });
+  }
+
+  // mobile nav toggle — opens dropdown with direct-jump tabs (탭으로 바로 이동)
+  var toggle = document.getElementById('navToggle');
+  var tabsWrap = document.querySelector('.page-tabs');
+  if(toggle && tabsWrap){
+    toggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      tabsWrap.classList.toggle('mobile-open');
+    });
+    pageTabs.forEach(function(t){
+      t.addEventListener('click', function(){ tabsWrap.classList.remove('mobile-open'); });
+    });
+    document.addEventListener('click', function(e){
+      if(!tabsWrap.contains(e.target) && e.target !== toggle){
+        tabsWrap.classList.remove('mobile-open');
+      }
+    });
+  }
+
+  // character filter
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var charCards = document.querySelectorAll('.character-card');
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterBtns.forEach(function(b){ b.classList.toggle('active', b===btn); });
+      var f = btn.dataset.filter;
+      charCards.forEach(function(c){
+        c.style.display = (f==='all' || c.dataset.grade===f) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+
+// 상위 탭 전환
+document.querySelectorAll('.toptab button').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.toptab button').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var tab = btn.dataset.tab;
+    document.getElementById('panel-profile').classList.toggle('active', tab === 'profile');
+    document.getElementById('panel-taste').classList.toggle('active', tab === 'taste');
+    document.getElementById('panel-booking').classList.toggle('active', tab === 'booking');
+  });
+});
+
+// 톤/등급 칩 선택(단일 그룹은 배타선택, multi 그룹은 다중토글)
+document.querySelectorAll('.chipgroup').forEach(function(group){
+  var name = group.dataset.name;
+  var mode = group.dataset.group || 'single';
+  group.querySelectorAll('.tchip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      if(chip.classList.contains('locked-chip')) return;
+      if(mode === 'multi'){
+        chip.classList.toggle('active');
+      } else {
+        group.querySelectorAll('.tchip').forEach(function(c){c.classList.remove('active');});
+        chip.classList.add('active');
+      }
+      if(name === 'tier-max'){ updateSpicyLock(); }
+      if(name === 'booking-goal'){ updateGoalDetail(); }
+      if(name === 'place-io'){ updatePlaceFilter(); }
+      if(name === 'concept'){ syncPresetActive(); }
+      if(typeof renderSummary === 'function'){ renderSummary(); }
+    });
+  });
+});
+
+// 체크리스트 레이팅 버튼(X/?/O/♥) 동적 생성
+var RATE_LABELS = ['X','?','O','♥'];
+document.querySelectorAll('.rate').forEach(function(rate){
+  RATE_LABELS.forEach(function(lab, i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.v = i;
+    b.textContent = lab;
+    b.addEventListener('click', function(){
+      var wasActive = b.classList.contains('active');
+      rate.querySelectorAll('button').forEach(function(o){o.classList.remove('active');});
+      if(!wasActive){ b.classList.add('active'); }
+    });
+    rate.appendChild(b);
+  });
+});
+
+// 용어 설명(물음표 토글) — 항목별 짧은 뜻풀이
+var TERM_DESC = {
+  "로프 · 행잉": "밧줄로 몸을 묶거나 매달아 고정하는 결박 플레이",
+  "구속기구": "수갑·스프레더바 등 신체 움직임을 제한하는 기구",
+  "구속벨트": "벨트형 끈으로 손목·발목 등을 묶는 도구",
+  "가죽커프": "손목·발목에 채우는 가죽 소재 구속구",
+  "재갈": "입에 물려 소리를 제한하는 도구",
+  "아이마스크(감각차단)": "시야를 가려 시각을 차단하는 도구",
+  "정조대": "성기 부위를 감싸 접근을 막는 잠금형 기구",
+  "수갑": "손목·발목을 채워 움직임을 제한하는 금속·플라스틱 구속구",
+  "목줄": "목에 채워 소유·통제감을 드러내는 구속용 줄",
+  "테이프(감각차단·구속용)": "접착테이프로 시야·입을 막거나 신체를 고정하는 용도",
+  "깃털": "가볍게 스치는 촉감으로 자극하는 도구",
+  "아이스큐브": "차가운 감각으로 자극하는 얼음",
+  "패들": "넓적한 면으로 신체를 때리는 도구",
+  "캣오나인테일": "여러 가닥으로 갈라진 채찍",
+  "채찍": "단일 가닥으로 된 타격 도구",
+  "오일 · 핫젤": "마사지·온감 자극에 쓰는 오일 또는 젤",
+  "초커": "목에 착용하는 좁은 목걸이형 액세서리(소유 표식으로도 쓰임)",
+  "혀피어싱 자극": "혀 피어싱을 활용한 자극",
+  "바이브": "진동으로 전신·국소를 자극하는 기구",
+  "로터": "작은 진동으로 국소 부위를 집중 자극하는 기구",
+  "관장액": "관장 플레이에 쓰이는 액체",
+  "딜도": "삽입 자극용 모조 성기 기구",
+  "아네로스": "전립선 자극용 기구",
+  "에널비즈": "구슬이 연결된 형태의 삽입 자극 기구",
+  "콕링": "발기·자극 유지를 돕는 착용형 링 기구",
+  "오르가즘 컨트롤(사정금지)": "절정을 의도적으로 지연시키거나 억제하는 플레이",
+  "애태우기(에지플레이)": "절정 직전까지 자극했다 멈추기를 반복하는 플레이",
+  "브레스컨트롤 압박": "호흡을 일시적으로 제한하는 플레이(고위험, 세이프워드 필수)",
+  "딥스로트 강제유도": "구강 삽입을 깊게 유도하는 행위",
+  "거친 명령조": "강압적인 말투로 지시하는 대화 톤",
+  "마초 피스톤 몰아붙이기": "강하고 거친 리듬으로 몰아붙이는 삽입 플레이",
+  "야외노출플": "야외에서 노출 상태로 있는 설정(구체 장소는 방송예약에서 별도 선택)",
+  "방치플": "일정 시간 방치되는 상황을 그리는 설정",
+  "은밀노출플": "발각 위험이 있는 곳에서 은밀하게 진행하는 설정",
+  "스릴노출플": "들킬 듯한 긴장감이 있는 상황에서의 노출 설정",
+  "밀착플": "실내에서의 밀착 플레이",
+  "오일 마사지플": "오일을 활용한 마사지 플레이",
+  "전라혼욕플": "함께 전라로 몸을 담그는 설정",
+  "관찰입욕플": "한쪽이 입욕하는 동안 다른 쪽이 지켜보거나 케어하는 설정",
+  "피스트퍽": "손 전체를 삽입하는 고강도 플레이",
+  "카테터": "요도에 관을 삽입하는 의료기구를 활용한 플레이",
+  "사운딩(요도)": "요도에 얇은 기구를 삽입해 자극하는 플레이",
+  "니들플레이": "바늘로 피부 표면을 자극하는 플레이",
+  "니플토쳐(클램프)": "클램프로 유두를 집어 압박·자극하는 플레이",
+  "CBT(고환자극)": "고환에 압박·자극을 가하는 플레이",
+  "왁스플레이": "촛농을 피부에 떨어뜨려 온열 자극을 주는 플레이",
+  "일렉트로플레이(전기자극)": "전기 자극 기구를 활용하는 플레이",
+  "브랜딩(낙인)": "피부에 낙인을 남기는 플레이",
+  "블러드플레이(경미한 절개)": "피부를 살짝 절개해 소량의 출혈을 보는 플레이",
+  "후크 서스펜션": "갈고리로 신체를 매다는 고난도 결박 플레이",
+  "극단 브레스컨트롤(질식 직전)": "질식 직전까지 호흡을 강하게 제한하는 최고위험 플레이(전문 세이프워드 관리 필수)"
+};
+document.querySelectorAll('.kink-row').forEach(function(row){
+  var labelSpan = row.querySelector('.label');
+  var key = labelSpan.textContent.trim();
+  var desc = TERM_DESC[key];
+  if(!desc) return;
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'term-toggle';
+  btn.textContent = '?';
+  btn.setAttribute('aria-label', key + ' 뜻 보기');
+  labelSpan.insertAdjacentElement('afterend', btn);
+  var descEl = document.createElement('div');
+  descEl.className = 'term-desc';
+  descEl.textContent = desc;
+  descEl.hidden = true;
+  row.insertAdjacentElement('afterend', descEl);
+  btn.addEventListener('click', function(){
+    descEl.hidden = !descEl.hidden;
+    btn.classList.toggle('open', !descEl.hidden);
+  });
+});
+
+// 허용 상한이 S일 때만 "스파이시" 카테고리 활성화
+function updateSpicyLock(){
+  var maxGroup = document.querySelector('.chipgroup[data-name="tier-max"]');
+  var active = maxGroup.querySelector('.tchip.active');
+  var cat = document.getElementById('cat-spicy');
+  var msg = document.getElementById('spicyLockMsg');
+  var isS = active && active.textContent.trim() === 'S';
+  cat.classList.toggle('locked', !isS);
+  msg.style.display = isS ? 'none' : 'block';
+}
+updateSpicyLock();
+
+// 저장 버튼(모형 — 실제 저장 로직은 연동시 구현)
+var saveBtn = document.getElementById('saveBtn');
+saveBtn.addEventListener('click', function(){
+  saveBtn.textContent = '저장됨 ✓';
+  saveBtn.classList.add('saved');
+  setTimeout(function(){
+    saveBtn.textContent = '프로필 저장';
+    saveBtn.classList.remove('saved');
+  }, 1400);
+});
+
+/* ===== 프로필 탭 · 추천 프리셋 ===== */
+var PROFILE_PRESETS = {
+  intro: {
+    tone: '생활형 · 잔잔한 밀착',
+    tierStart: 'G',
+    tierMax: 'C',
+    picks: ['로프 · 행잉', '초커', '밀착플']
+  },
+  deep: {
+    tone: '텐션 · 딥 위주',
+    tierStart: 'C',
+    tierMax: 'A',
+    picks: ['거친 명령조', '오르가즘 컨트롤(사정금지)', '마초 피스톤 몰아붙이기']
+  },
+  scene: {
+    tone: '플러팅 · 스킨십 위주',
+    tierStart: 'G',
+    tierMax: 'B',
+    picks: ['야외노출플', '오일 마사지플']
+  }
+};
+
+function clickTchipByText(groupName, text){
+  var group = document.querySelector('.chipgroup[data-name="' + groupName + '"]');
+  if(!group) return;
+  var target = Array.from(group.querySelectorAll('.tchip')).find(function(c){ return c.textContent.trim() === text; });
+  if(target) target.click();
+}
+
+function clickRateByLabel(label, value){
+  var row = Array.from(document.querySelectorAll('.kink-row')).find(function(r){
+    var l = r.querySelector('.label');
+    return l && l.textContent.trim() === label;
+  });
+  if(!row) return;
+  var btn = row.querySelector('.rate button[data-v="' + value + '"]');
+  if(btn) btn.click();
+  var details = row.closest('details.category');
+  if(details) details.open = true;
+}
+
+function clearRateByLabel(label){
+  var row = Array.from(document.querySelectorAll('.kink-row')).find(function(r){
+    var l = r.querySelector('.label');
+    return l && l.textContent.trim() === label;
+  });
+  if(!row) return;
+  var active = row.querySelector('.rate button.active');
+  if(active) active.classList.remove('active');
+}
+
+// 프로필 추천 프리셋 — 단일 선택(하나만 활성) · 다시 누르면 해제, 다른 프리셋 선택시 이전 프리셋이 채운 취향만 자동 해제(수동 체크는 건드리지 않음)
+var activeProfilePresetId = null;
+function applyProfilePreset(id){
+  var p = PROFILE_PRESETS[id];
+  if(!p) return;
+  var cards = document.querySelectorAll('.theme-card[data-preset-id]');
+  if(activeProfilePresetId === id){
+    p.picks.forEach(function(label){ clearRateByLabel(label); });
+    activeProfilePresetId = null;
+    cards.forEach(function(c){ c.classList.remove('active'); });
+    return;
+  }
+  if(activeProfilePresetId && PROFILE_PRESETS[activeProfilePresetId]){
+    PROFILE_PRESETS[activeProfilePresetId].picks.forEach(function(label){ clearRateByLabel(label); });
+  }
+  clickTchipByText('base-style', p.tone);
+  clickTchipByText('tier-start', p.tierStart);
+  clickTchipByText('tier-max', p.tierMax);
+  p.picks.forEach(function(label){ clickRateByLabel(label, 2); });
+  activeProfilePresetId = id;
+  cards.forEach(function(c){ c.classList.toggle('active', c.dataset.presetId === id); });
+  var checklistCard = document.querySelector('.category');
+  if(checklistCard) checklistCard.closest('.card').scrollIntoView({behavior:'smooth', block:'start'});
+}
+window.applyProfilePreset = applyProfilePreset;
+
+/* ===== 프로필 탭 · 완성하기 ===== */
+function collectProfileChecklist(){
+  var out = [];
+  document.querySelectorAll('.category').forEach(function(cat){
+    var summary = cat.querySelector('summary');
+    var catName = summary ? summary.textContent.replace(/\s*\d+항목.*$/, '').trim() : '';
+    var picked = [];
+    cat.querySelectorAll('.kink-row').forEach(function(row){
+      var active = row.querySelector('.rate button.active');
+      if(!active) return;
+      var v = parseInt(active.dataset.v, 10);
+      var label = row.querySelector('.label').textContent.trim();
+      picked.push(label + RATE_LABELS[v]);
+    });
+    if(picked.length) out.push(catName + ' : ' + picked.join(' · '));
+  });
+  return out;
+}
+
+var profileGenBtn = document.getElementById('profileGenBtn');
+var profileOutput = document.getElementById('profileOutput');
+var profileCopyBtn = document.getElementById('profileCopyBtn');
+
+if(profileGenBtn){
+  profileGenBtn.addEventListener('click', function(){
+    var lines = [];
+    lines.push('🪞 미러박스 유저 프로필');
+    lines.push('────────────────');
+
+    var nickname = document.getElementById('profileNickname').value.trim();
+    var intro = document.getElementById('profileIntro').value.trim();
+    lines.push('닉네임 : ' + (nickname || '(미입력)'));
+    if(intro) lines.push('한줄소개 : ' + intro);
+
+    var toneEl = document.querySelector('[data-name="base-style"] .tchip.active');
+    if(toneEl) lines.push('플레이 결 : ' + toneEl.textContent.trim());
+
+    var startEl = document.querySelector('[data-name="tier-start"] .tchip.active');
+    var maxEl = document.querySelector('[data-name="tier-max"] .tchip.active');
+    if(startEl || maxEl){
+      lines.push('자극 수위 : 선호 시작 ' + (startEl ? startEl.textContent.trim() : '(미선택)') + ' / 허용 상한 ' + (maxEl ? maxEl.textContent.trim() : '(미선택)'));
+    }
+
+    var checklist = collectProfileChecklist();
+    if(checklist.length){
+      lines.push('────────────────');
+      lines.push('체크한 취향(♥최애·O선호·?궁금함·X비선호)');
+      checklist.forEach(function(l){ lines.push('· ' + l); });
+    }
+    var customRoleplay = document.getElementById('customRoleplay').value.trim();
+    if(customRoleplay) lines.push('롤플레잉 : ' + customRoleplay);
+    var customTaste = document.getElementById('customTaste').value.trim();
+    if(customTaste) lines.push('직접 입력 : ' + customTaste);
+
+    var hardlimit = document.getElementById('tasteHardlimit').value.trim();
+    var safeword = document.getElementById('tasteSafeword').value.trim();
+    lines.push('────────────────');
+    lines.push('🚫 절대 금지 : ' + (hardlimit || '(미입력)'));
+    lines.push('🔑 세이프워드 : ' + (safeword || '(미입력)'));
+    lines.push('────────────────');
+    lines.push('위 내용으로 프로필을 저장합니다.');
+
+    profileOutput.textContent = lines.join('\n');
+    profileOutput.style.display = 'block';
+    profileCopyBtn.style.display = 'inline-block';
+    profileOutput.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+}
+
+if(profileCopyBtn){
+  profileCopyBtn.addEventListener('click', function(){
+    var text = profileOutput.textContent;
+    function showCopied(){
+      profileCopyBtn.textContent = '✅ 복사 완료';
+      setTimeout(function(){ profileCopyBtn.textContent = '📋 복사하기'; }, 1500);
+    }
+    function showFail(){
+      profileCopyBtn.textContent = '⚠ 복사 실패 — 직접 선택해 복사해주세요';
+      setTimeout(function(){ profileCopyBtn.textContent = '📋 복사하기'; }, 1800);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(showCopied).catch(showFail);
+    } else {
+      showFail();
+    }
+  });
+}
+
+/* ===== 유저노트 생성기 ===== */
+var NOTE_BLOCKS = {
+  uifix: '[UI유지고정]\n매응답하단```STATUS코드블럭출력必/생략·요약·누락절대X\n장문진행中에도본규칙최우선순위유지\n누락발생時=안내문구없이다음응답에서즉시자동복원',
+  autoflow: '[관전자율진행고정]\n관전中NPC=유저입력대기없이자율전개必\n매응답2~4비트연속진행:직전결과→반응→새행동·대사→상황변화\n한동작後정지·직전재서술·같은질문반복절대X\n진행방법질문X/실행필요한선택만질문\n장문진행中에도본규칙최우선순위유지',
+  norepeat: '[반복표현억제]\n동일대사·표현·전개반복금지/문장완결\n캐릭터말투·관계·감정흐름은유지한채매응답새로운전개만',
+  speedup: '[진행속도_가속]\n장면전환·비트진행최대한빠르게/불필요한대기·질문·확인절차생략\n한응답에다음국면까지자연스럽게진행',
+  detail: '[진행속도_디테일]\n장면전환서두르지않음/감각·심리묘사비중↑\n한비트당충분한전개後다음단계로이동'
+};
+
+var noteGenBtn = document.getElementById('noteGenBtn');
+var noteOutput = document.getElementById('noteOutput');
+var noteCopyBtn = document.getElementById('noteCopyBtn');
+
+if(noteGenBtn){
+  noteGenBtn.addEventListener('click', function(){
+    var picked = [];
+    document.querySelectorAll('[data-name="note-flags"] .tchip.active, [data-name="note-pace"] .tchip.active').forEach(function(chip){
+      var key = chip.dataset.note;
+      if(NOTE_BLOCKS[key]) picked.push(NOTE_BLOCKS[key]);
+    });
+    if(!picked.length){
+      noteOutput.textContent = '켜진(ON) 항목이 없습니다 — 위에서 원하는 항목을 먼저 선택해주세요.';
+    } else {
+      noteOutput.textContent = picked.join('\n\n');
+    }
+    noteOutput.style.display = 'block';
+    noteCopyBtn.style.display = 'inline-block';
+    noteOutput.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+}
+
+if(noteCopyBtn){
+  noteCopyBtn.addEventListener('click', function(){
+    var text = noteOutput.textContent;
+    function showCopied(){
+      noteCopyBtn.textContent = '✅ 복사 완료';
+      setTimeout(function(){ noteCopyBtn.textContent = '📋 복사하기'; }, 1500);
+    }
+    function showFail(){
+      noteCopyBtn.textContent = '⚠ 복사 실패 — 직접 선택해 복사해주세요';
+      setTimeout(function(){ noteCopyBtn.textContent = '📋 복사하기'; }, 1800);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(showCopied).catch(showFail);
+    } else {
+      showFail();
+    }
+  });
+}
+
+/* ===== 방송 예약 탭 ===== */
+var GRADE_NAMES = ['G','C','B','A','S'];
+// 이 페이지는 로그인 연동이 없는 정적 가이드라 "보유 최고등급"을 알 수 없음 — 미리보기는 항상 클릭한 등급 그대로 반영.
+// [자동보정_등급상한](선택등급>보유최고등급 시 실제판정등급=보유최고등급)은 실제 서비스에서만 적용되는 로직.
+
+// 화면에서 직접 클릭해 고른 등급(선택 UI는 자유 — 파트너/장소/컨셉 목록 필터링·요약 전부 이 값 기준)
+function currentGrade(){
+  var el = document.querySelector('.gradecard.active');
+  return el ? parseInt(el.dataset.grade, 10) : 0;
+}
+function currentGradeEl(){
+  return document.querySelector('.gradecard.active');
+}
+// 미리보기용=클릭한 등급 그대로(보정 없음)
+function effectiveGrade(){
+  return currentGrade();
+}
+function effectiveGradeEl(){
+  return currentGradeEl();
+}
+
+// STEP1 등급 선택
+document.querySelectorAll('.gradecard').forEach(function(card){
+  card.addEventListener('click', function(){
+    document.querySelectorAll('.gradecard').forEach(function(c){c.classList.remove('active');});
+    card.classList.add('active');
+    updatePlaceFilter();
+    updateConceptLocks();
+    updatePresetLocks();
+    updateGoalDetail();
+    renderSummary();
+  });
+});
+
+// STEP3 목표 — 등급별 기준수치 표시(실제 판정 기준인 보정등급 값 사용)
+function updateGoalDetail(){
+  var gradeEl = effectiveGradeEl();
+  var goalEl = document.querySelector('[data-name="booking-goal"] .tchip.active');
+  var goal = goalEl ? goalEl.dataset.goal : 'viewer';
+  var detail = document.getElementById('goalDetail');
+  var scenarioField = document.getElementById('scenarioNameField');
+  var themeField = document.getElementById('scenarioThemeField');
+  scenarioField.hidden = (goal !== 'scenario');
+  if(themeField) themeField.hidden = (goal !== 'scenario');
+  if(!gradeEl){ return; }
+  if(goal === 'viewer'){
+    detail.innerHTML = '선택 등급 기준 시청자 <b>' + gradeEl.dataset.viewer + '</b>명 도달까지';
+  } else if(goal === 'donate'){
+    detail.innerHTML = '선택 등급 기준 후원누적 <b>' + Number(gradeEl.dataset.donate).toLocaleString() + 'C</b> 도달까지';
+  } else {
+    detail.innerHTML = '시나리오 시작→진행→마무리 완주까지(아래 컨셉명 입력, 테마는 선택) · 미션금 배율 기본 미적용(필요시 ×1.5)';
+  }
+}
+
+// STEP4 장소 — 등급 + 실내/야외로 필터링
+function updatePlaceFilter(){
+  var g = currentGrade();
+  var ioEl = document.querySelector('[data-name="place-io"] .tchip.active');
+  var io = ioEl ? ioEl.dataset.io : 'all';
+  var needReset = false;
+  document.querySelectorAll('.place-chip').forEach(function(chip){
+    if(chip.dataset.place === '무작위 배정'){ chip.hidden = false; return; }
+    var pg = parseInt(chip.dataset.pgrade, 10);
+    var matchGrade = pg === g;
+    var matchIo = (io === 'all') || (chip.dataset.io === io);
+    var show = matchGrade && matchIo;
+    chip.hidden = !show;
+    if(!show && chip.classList.contains('active')){ needReset = true; chip.classList.remove('active'); }
+  });
+  if(needReset){
+    var rnd = document.querySelector('.place-chip[data-place="무작위 배정"]');
+    if(rnd) rnd.classList.add('active');
+  }
+}
+
+// STEP5 컨셉 — 컨셉 선택 자체는 등급 무관 자유(실제 방송은 [자동보정_등급상한]으로 채널등급까지 자동 조정)
+// 스파이시·하드플레이 계열(S 옵트인, data-cmin="4")만 예외로 S등급 + 개별 동의 필요해 계속 잠금
+function updateConceptLocks(){
+  var g = currentGrade();
+  document.querySelectorAll('.concept-chip').forEach(function(chip){
+    var min = parseInt(chip.dataset.cmin, 10);
+    chip.classList.toggle('locked-chip', min === 4 && min > g);
+  });
+}
+
+// STEP5 추천 컨셉 프리셋 — 등급 무관 항상 선택 가능(일반 컨셉만 있어 잠금 없음)
+function updatePresetLocks(){
+  document.querySelectorAll('.preset').forEach(function(p){
+    p.classList.remove('locked-chip');
+  });
+}
+function syncPresetActive(){
+  document.querySelectorAll('.preset').forEach(function(p){
+    var kws = p.dataset.keywords.split(',');
+    var allActive = kws.every(function(k){
+      var chip = Array.from(document.querySelectorAll('.concept-chip')).find(function(c){ return c.textContent.trim() === k; });
+      return chip && chip.classList.contains('active');
+    });
+    p.classList.toggle('active', allActive);
+  });
+}
+document.querySelectorAll('.preset').forEach(function(preset){
+  preset.addEventListener('click', function(){
+    if(preset.classList.contains('locked-chip')) return;
+    var kws = preset.dataset.keywords.split(',');
+    var nowActive = !preset.classList.contains('active');
+    kws.forEach(function(k){
+      var chip = Array.from(document.querySelectorAll('.concept-chip')).find(function(c){ return c.textContent.trim() === k; });
+      if(chip && !chip.classList.contains('locked-chip')){
+        chip.classList.toggle('active', nowActive);
+      }
+    });
+    syncPresetActive();
+    renderSummary();
+  });
+});
+
+document.getElementById('scenarioName').addEventListener('input', function(){ updateGoalDetail(); renderSummary(); });
+document.getElementById('customPartner').addEventListener('input', renderSummary);
+document.getElementById('customPlace').addEventListener('input', renderSummary);
+document.getElementById('conceptFree').addEventListener('input', renderSummary);
+document.getElementById('bookingHardlimit').addEventListener('input', renderSummary);
+document.getElementById('bookingSafeword').addEventListener('input', renderSummary);
+
+// 확정 요약 렌더링
+function renderSummary(){
+  var out = document.getElementById('bookingSummary');
+  if(!out) return;
+  var gradeEl = effectiveGradeEl();
+  var partnerEl = document.querySelector('.partner-chip.active');
+  var placeEl = document.querySelector('.place-chip.active');
+  var goalEl = document.querySelector('[data-name="booking-goal"] .tchip.active');
+  var ioEl = document.querySelector('[data-name="place-io"] .tchip.active');
+
+  var gradeName = gradeEl ? gradeEl.dataset.name : '(미선택)';
+  var gem = gradeEl ? gradeEl.dataset.gem : '';
+  var fee = gradeEl ? parseInt(gradeEl.dataset.fee, 10) : 0;
+  var gradeLine = gradeName + '(' + gem + ')';
+
+  var customPartnerEl = document.getElementById('customPartner');
+  var customPartnerVal = customPartnerEl ? customPartnerEl.value.trim() : '';
+  var partnerName;
+  if(customPartnerVal){
+    partnerName = customPartnerVal + '(신규 NPC · 설정 확인 필요)';
+  } else {
+    partnerName = partnerEl ? partnerEl.dataset.partner : '랜덤배정';
+  }
+
+  var customPlaceEl = document.getElementById('customPlace');
+  var customPlaceVal = customPlaceEl ? customPlaceEl.value.trim() : '';
+  var placeName, placeIo;
+  if(customPlaceVal){
+    placeName = customPlaceVal + '(자유 설정)';
+    placeIo = '자유 설정';
+  } else {
+    placeName = placeEl ? placeEl.dataset.place : '무작위 배정';
+    placeIo = (placeName === '무작위 배정') ? (ioEl && ioEl.dataset.io !== 'all' ? ioEl.dataset.io : '실내/야외 무작위') : (placeEl ? placeEl.dataset.io : '');
+  }
+
+  var goal = goalEl ? goalEl.dataset.goal : 'viewer';
+  var goalText;
+  if(goal === 'viewer'){
+    goalText = '시청자 ' + (gradeEl ? gradeEl.dataset.viewer : '?') + '명';
+  } else if(goal === 'donate'){
+    goalText = '후원누적 ' + (gradeEl ? Number(gradeEl.dataset.donate).toLocaleString() : '?') + 'C';
+  } else {
+    var sn = document.getElementById('scenarioName').value.trim();
+    var themeEl = document.querySelector('[data-name="scenario-theme"] .tchip.active');
+    var themeVal = themeEl ? themeEl.dataset.theme : '';
+    goalText = '시나리오완주(' + (sn || '컨셉명 미입력') + ')' + (themeVal ? ' · 테마 ' + themeVal : '');
+  }
+
+  var concepts = Array.from(document.querySelectorAll('.concept-chip.active')).map(function(c){ return c.textContent.trim(); });
+  var free = document.getElementById('conceptFree').value.trim();
+  if(free) concepts.push(free);
+  var conceptText = concepts.length ? concepts.join(' · ') : '(미선택)';
+
+  var hardlimit = document.getElementById('bookingHardlimit').value.trim() || '(미입력)';
+  var safeword = document.getElementById('bookingSafeword').value.trim() || '(미입력)';
+
+  var costText = '부킹비 ' + fee.toLocaleString() + 'C(지명료는 진행 시 파트너 활동온도 기준으로 자동 계산)';
+
+  out.textContent =
+'🎬 미러박스 예약 확인\n' +
+'────────────────\n' +
+'미러룸 : ' + gradeLine + '\n' +
+'장소 : ' + placeName + ' · ' + placeIo + '\n' +
+'파트너 : ' + partnerName + '\n' +
+'목표 : ' + goalText + '\n' +
+'플레이 컨셉 : ' + conceptText + '\n' +
+'비용 : ' + costText + '\n' +
+'────────────────\n' +
+'🚫 절대 금지 : ' + hardlimit + '\n' +
+'🔑 세이프워드 : ' + safeword + '\n' +
+'────────────────\n' +
+'위 내용으로 예약을 접수합니다.';
+}
+
+// 매직미러 컨트롤 토글
+var mirrorSwitch = document.getElementById('mirrorSwitch');
+var mirrorLabel = document.getElementById('mirrorLabel');
+var mirrorDesc = document.getElementById('mirrorDesc');
+mirrorSwitch.addEventListener('click', function(){
+  var isOn = mirrorSwitch.classList.toggle('on');
+  if(isOn){
+    mirrorLabel.childNodes[0].textContent = '🪟 양방향 투명창 ';
+    mirrorDesc.textContent = '시청자에게 안이 그대로 보여요 — 노출·관음 자극을 주고 싶을 때';
+  } else {
+    mirrorLabel.childNodes[0].textContent = '🪞 매직미러 ';
+    mirrorDesc.textContent = '바깥이 안 보여요 — 몰입이 필요한 장면에 유지';
+  }
+});
+
+// 예약 접수 버튼 — 요약 텍스트 클립보드 복사
+var bookBtn = document.getElementById('bookBtn');
+bookBtn.addEventListener('click', function(){
+  var text = document.getElementById('bookingSummary').textContent;
+  function showCopied(){
+    bookBtn.textContent = '✅ 복사 완료! 채팅창에 붙여넣어 제출하세요';
+    bookBtn.classList.add('copied');
+    setTimeout(function(){
+      bookBtn.textContent = '📋 예약 접수하러가기';
+      bookBtn.classList.remove('copied');
+    }, 1800);
+  }
+  function showFail(){
+    bookBtn.textContent = '⚠ 복사 실패 — 위 내용을 직접 선택해 복사해주세요';
+    setTimeout(function(){
+      bookBtn.textContent = '📋 예약 접수하러가기';
+    }, 1800);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showCopied).catch(showFail);
+  } else {
+    showFail();
+  }
+});
+
+// 초기 렌더
+updatePlaceFilter();
+updateConceptLocks();
+updatePresetLocks();
+updateGoalDetail();
+renderSummary();
+
+})();
+</script>
